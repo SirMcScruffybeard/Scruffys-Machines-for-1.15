@@ -1,0 +1,20 @@
+{
+	"item.scruffysmachines.iron_rivet_item": "Iron Rivet",
+	
+	"item.scruffysmachines.stone_dust_item": "Stone Dust",
+	
+	"item.scruffysmachines.oven_brick_item": "Oven Brick",
+	
+	"block.scruffysmachines.oven_bricks_block": "Oven Bricks",
+	
+	
+	"block.scruffysmachines.brick_furnace": "Brick Furnace",
+	"block.scruffysmachines.brick_fluid_tank": "Brick Fluid Tank",
+	"block.scruffysmachines.leather_chest": "Leather Chest",
+	
+	
+	"container.leather_chest": "Leather Chest",
+	
+	
+	"itemGroup.scruffysmachinestab": "Scruffy's Machines"
+}
