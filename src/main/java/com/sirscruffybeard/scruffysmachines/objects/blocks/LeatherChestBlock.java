@@ -59,7 +59,6 @@ public class LeatherChestBlock extends Block{
 	
 	@Override
 	public boolean hasTileEntity(BlockState state) {
-		// TODO Auto-generated method stub
 		return true;
 	}
 	
@@ -78,7 +77,6 @@ public class LeatherChestBlock extends Block{
 			TileEntity tile = worldIn.getTileEntity(pos);
 			
 			if(tile instanceof LeatherChestTileEntity) {
-				
 				NetworkHooks.openGui((ServerPlayerEntity)player, (LeatherChestTileEntity)tile, pos);
 				return ActionResultType.SUCCESS;
 			}
