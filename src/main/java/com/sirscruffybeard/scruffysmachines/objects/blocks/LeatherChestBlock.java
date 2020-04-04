@@ -95,7 +95,6 @@ public class LeatherChestBlock extends Block{
 			TileEntity te = worldIn.getTileEntity(pos);
 			
 			if(te instanceof LeatherChestTileEntity) {
-				
 				InventoryHelper.dropItems(worldIn, pos, ((LeatherChestTileEntity)te).getItems());
 			}
 		}

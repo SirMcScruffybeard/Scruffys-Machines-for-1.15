@@ -27,7 +27,6 @@ public class LeatherChestContainer extends Container{
 		this.tileEntity = tileEntity;
 		this.canInteractWithCallable = IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos());
 		
-		
 		// Main Inventory
 				int startX = 12;
 				int startY = 25;
@@ -70,6 +69,7 @@ public class LeatherChestContainer extends Container{
 		throw new IllegalStateException("Tile entity is not Correct" + tileAtPos);
 	}//getTileEntity
 	
+	//Constructor
 	public LeatherChestContainer(final int windowId, final PlayerInventory playerInventory, final PacketBuffer data) {
 		
 		this(windowId, playerInventory, getTileEntity(playerInventory, data));
