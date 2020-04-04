@@ -1,10 +1,8 @@
 package com.sirscruffybeard.scruffysmachines.init;
 
 import com.sirscruffybeard.scruffysmachines.ScruffysMachines;
-import com.sirscruffybeard.scruffysmachines.objects.blocks.BrickFurnaceBlock;
 import com.sirscruffybeard.scruffysmachines.objects.blocks.CrumblerBlock;
 import com.sirscruffybeard.scruffysmachines.objects.blocks.LeatherChestBlock;
-import com.sirscruffybeard.scruffysmachines.tileentity.BrickFurnaceTileEntity;
 import com.sirscruffybeard.scruffysmachines.tileentity.CrumblerTileEntity;
 import com.sirscruffybeard.scruffysmachines.tileentity.LeatherChestTileEntity;
 
@@ -23,6 +21,5 @@ public class ModTileEntityTypes {
 	public static final RegistryObject<TileEntityType<CrumblerTileEntity>> CRUMBLER = TILE_ENTITY_TYPES
 			.register(CrumblerBlock.ID, () -> TileEntityType.Builder.create(CrumblerTileEntity::new,  BlockInit.CRUMBLER.get()).build(null));
 	
-	public static final RegistryObject<TileEntityType<BrickFurnaceTileEntity>> BRICK_FURNACE = TILE_ENTITY_TYPES
-			.register(BrickFurnaceBlock.ID, () -> TileEntityType.Builder.create(BrickFurnaceTileEntity::new,  BlockInit.BRICK_FURNACE.get()).build(null));
+
 }

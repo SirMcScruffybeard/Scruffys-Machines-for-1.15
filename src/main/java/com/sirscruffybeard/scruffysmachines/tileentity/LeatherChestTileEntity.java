@@ -40,7 +40,6 @@ public class LeatherChestTileEntity extends LockableLootTileEntity {
 	protected int numPlayerUsing;
 	
 	private IItemHandlerModifiable items = createHandler();
-	
 	private LazyOptional<IItemHandlerModifiable> itemHandler = LazyOptional.of(() -> items);
 	
 	public LeatherChestTileEntity(TileEntityType<?> typeIn) {
