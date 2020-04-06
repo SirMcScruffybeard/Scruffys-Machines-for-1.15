@@ -22,6 +22,9 @@ public class LeatherChestContainer extends Container{
 	
 	private final IWorldPosCallable canInteractWithCallable;
 	
+	/********************************************************************************************************************************
+	 * Constructor
+	 ********************************************************************************************************************************/
 	public LeatherChestContainer(final int windowId, final PlayerInventory playerInventory, final LeatherChestTileEntity tileEntity) {
 		super(ModContainerTypes.LEATHER_CHEST.get(), windowId);
 		this.tileEntity = tileEntity;
@@ -54,6 +57,9 @@ public class LeatherChestContainer extends Container{
 				}
 	}
 	
+	/********************************************************************************************************************************
+	 * GetTileEntity
+	 ********************************************************************************************************************************/
 	private static LeatherChestTileEntity getTileEntity(final PlayerInventory playerInventory, final PacketBuffer data) {
 		
 		Objects.requireNonNull(playerInventory, "playerInventory cannot be null");
@@ -69,12 +75,17 @@ public class LeatherChestContainer extends Container{
 		throw new IllegalStateException("Tile entity is not Correct" + tileAtPos);
 	}//getTileEntity
 	
-	//Constructor
+	/********************************************************************************************************************************
+	 * Constructor
+	 ********************************************************************************************************************************/
 	public LeatherChestContainer(final int windowId, final PlayerInventory playerInventory, final PacketBuffer data) {
 		
 		this(windowId, playerInventory, getTileEntity(playerInventory, data));
 	}
 	
+	/********************************************************************************************************************************
+	 * canInteractWith
+	 ********************************************************************************************************************************/
 	@Override
 	public boolean canInteractWith(PlayerEntity playerIn) {
 		

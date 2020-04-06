@@ -1,19 +1,20 @@
 package com.sirscruffybeard.scruffysmachines.objects.blocks;
 
-import com.sirscruffybeard.scruffysmachines.ScruffysMachines.ScruffysMachinesItemGroup;
 import com.sirscruffybeard.scruffysmachines.init.ModTileEntityTypes;
-
+import com.sirscruffybeard.scruffysmachines.tileentity.BrickFurnaceTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
-import net.minecraftforge.common.ToolType;
+import net.minecraft.world.World;
 
 public class BrickFurnaceBlock extends FurnaceBaseBlock{
 
@@ -31,19 +32,10 @@ public class BrickFurnaceBlock extends FurnaceBaseBlock{
 
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
 		
-		
-
-	}
-	
-	@Override
-	public  ToolType getHarvestTool(BlockState state) {
-		return super.getHarvestTool(state);
 	}
 	
     @Override
-    public int getHarvestLevel(BlockState state) {
-        return 2;
-    }
+    public int getHarvestLevel(BlockState state) { return 2; }
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
@@ -59,6 +51,17 @@ public class BrickFurnaceBlock extends FurnaceBaseBlock{
 	}
 
 	
-
+	@Override
+	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+		
+		if(state.getBlock() != newState.getBlock()) {
+			
+			TileEntity te = worldIn.getTileEntity(pos);
+			
+			if(te instanceof BrickFurnaceTileEntity) {
+				InventoryHelper.dropItems(worldIn, pos, ((BrickFurnaceTileEntity)te).getItems());
+			}
+		}
+	}//onReplaced
 
 }

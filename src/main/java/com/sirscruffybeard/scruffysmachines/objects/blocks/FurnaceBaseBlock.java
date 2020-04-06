@@ -185,12 +185,4 @@ public abstract class FurnaceBaseBlock extends Block{
 	@Override
 	public BlockState mirror(BlockState state, Mirror mirrorIn) { return state.rotate(mirrorIn.toRotation(state.get(FACING))); }
 
-	public ToolType getHarvestTool() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-
 }//FurnaceBaseBlock
