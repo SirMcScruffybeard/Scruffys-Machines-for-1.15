@@ -3,18 +3,29 @@
 	
 	"item.scruffysmachines.stone_dust_item": "Stone Dust",
 	
-	"item.scruffysmachines.oven_brick_item": "Oven Brick",
+	
+	
+	
+	
+	"item.scruffysmachines.leather_steam_pod_item": "Leather Steam Pod",
+	"item.scruffysmachines.iron_steam_pod_item": "Iron Steam Pod",
+	
+	
+	
+	
 	
 	"block.scruffysmachines.oven_bricks_block": "Oven Bricks",
 	
 	
-	"block.scruffysmachines.brick_furnace": "Brick Furnace",
+	
 	"block.scruffysmachines.brick_fluid_tank": "Brick Fluid Tank",
+	
 	"block.scruffysmachines.leather_chest": "Leather Chest",
-	
-	
 	"container.leather_chest": "Leather Chest",
 	
+	"block.scruffysmachines.crumbler": "Crumbler",
+	
+	"block.scruffysmachines.brick_furnace": "Brick Furnace",
 	
 	"itemGroup.scruffysmachinestab": "Scruffy's Machines"
 }

@@ -4,5 +4,6 @@
         "facing=south": { "model": "scruffysmachines:block/brick_furnace", "y": 180 },
         "facing=west":  { "model": "scruffysmachines:block/brick_furnace", "y": 270 },
         "facing=east":  { "model": "scruffysmachines:block/brick_furnace", "y": 90 }
+
     }
 }

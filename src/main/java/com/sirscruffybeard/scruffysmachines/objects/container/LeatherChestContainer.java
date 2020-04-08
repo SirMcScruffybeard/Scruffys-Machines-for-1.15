@@ -1,4 +1,4 @@
-package com.sirscruffybeard.scruffysmachines.container;
+package com.sirscruffybeard.scruffysmachines.objects.container;
 
 import java.util.Objects;
 

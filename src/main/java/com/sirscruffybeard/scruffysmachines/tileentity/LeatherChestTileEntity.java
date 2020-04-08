@@ -2,9 +2,9 @@ package com.sirscruffybeard.scruffysmachines.tileentity;
 
 import javax.annotation.Nonnull;
 
-import com.sirscruffybeard.scruffysmachines.container.LeatherChestContainer;
 import com.sirscruffybeard.scruffysmachines.init.ModTileEntityTypes;
 import com.sirscruffybeard.scruffysmachines.objects.blocks.LeatherChestBlock;
+import com.sirscruffybeard.scruffysmachines.objects.container.LeatherChestContainer;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

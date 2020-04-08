@@ -2,7 +2,7 @@ package com.sirscruffybeard.scruffysmachines.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.sirscruffybeard.scruffysmachines.ScruffysMachines;
-import com.sirscruffybeard.scruffysmachines.container.LeatherChestContainer;
+import com.sirscruffybeard.scruffysmachines.objects.container.LeatherChestContainer;
 
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;

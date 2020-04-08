@@ -36,6 +36,11 @@ public class LeatherChestBlock extends Block{
 	
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 	
+	/***********************************************
+	 * Constructor
+	 * 
+	 * @param Properties properties
+	 ***********************************************/
 	public LeatherChestBlock(Properties properties) {
 		super(properties);
 		

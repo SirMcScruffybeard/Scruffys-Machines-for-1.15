@@ -2,6 +2,8 @@ package com.sirscruffybeard.scruffysmachines.init;
 
 import com.sirscruffybeard.scruffysmachines.ScruffysMachines;
 import com.sirscruffybeard.scruffysmachines.ScruffysMachines.ScruffysMachinesItemGroup;
+import com.sirscruffybeard.scruffysmachines.objects.items.IronSteamPodItem;
+import com.sirscruffybeard.scruffysmachines.objects.items.LeatherSteamPodItem;
 
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
@@ -16,6 +18,12 @@ public class ItemInit {
 	
 	public static RegistryObject<Item> STONE_DUST = ITEMS.register("stone_dust_item", () -> new Item(new Item.Properties().group(ScruffysMachinesItemGroup.instance)));
 	
-	public static RegistryObject<Item> OVEN_BRICK = ITEMS.register("oven_brick_item", () -> new Item(new Item.Properties().group(ScruffysMachinesItemGroup.instance)));
 	
+	
+	
+	
+	
+	
+	public static RegistryObject<Item> LEATHER_STEAM_POD = ITEMS.register(LeatherSteamPodItem.ID, () -> new Item(new LeatherSteamPodItem.Properties().group(ScruffysMachinesItemGroup.instance)));
+	public static RegistryObject<Item> IRON_STEAM_POD = ITEMS.register(IronSteamPodItem.ID, () -> new Item(new IronSteamPodItem.Properties().group(ScruffysMachinesItemGroup.instance)));
 }
