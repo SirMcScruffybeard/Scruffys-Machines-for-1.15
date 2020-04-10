@@ -18,6 +18,8 @@ public class ClientEventBusSuscriber {
 	public static void clientSetup(FMLClientSetupEvent event) {
 		
 		ScreenManager.registerFactory(ModContainerTypes.LEATHER_CHEST.get(),LeatherChestScreen::new);
+		
+		
 	}
 	
 }

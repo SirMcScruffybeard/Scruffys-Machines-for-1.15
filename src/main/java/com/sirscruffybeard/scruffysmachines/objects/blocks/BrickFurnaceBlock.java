@@ -2,51 +2,43 @@ package com.sirscruffybeard.scruffysmachines.objects.blocks;
 
 import java.util.Random;
 
+import com.sirscruffybeard.scruffysmachines.init.ModTileEntityTypes;
 import com.sirscruffybeard.scruffysmachines.objects.blocks.bases.FurnaceBaseBlock;
 import com.sirscruffybeard.scruffysmachines.tileentity.BrickFurnaceTileEntity;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.block.RedstoneTorchBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.state.BooleanProperty;
 import net.minecraft.stats.Stats;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class BrickFurnaceBlock extends FurnaceBaseBlock{
 
-	public static String ID = "brick_furnace";
-
-
-	public static final BooleanProperty LIT = RedstoneTorchBlock.LIT;
-
+	public static final String ID = "brick_furnace";
+	
 	public BrickFurnaceBlock(Properties properties) {
 		super(properties);
-
-
+		
 	}
-
-	/**
-	 * Interface for handling interaction with blocks that impliment AbstractFurnaceBlock. Called in onBlockActivated
-	 * inside AbstractFurnaceBlock.
-	 */
+	
 	protected void interactWith(World worldIn, BlockPos pos, PlayerEntity player) {
-		TileEntity tileentity = worldIn.getTileEntity(pos);
-		if (tileentity instanceof BrickFurnaceTileEntity) {
-			player.openContainer((INamedContainerProvider)tileentity);
-			player.addStat(Stats.INTERACT_WITH_FURNACE);
-		}
+	      TileEntity tileentity = worldIn.getTileEntity(pos);
+	      if (tileentity instanceof BrickFurnaceTileEntity) {
+	         player.openContainer((INamedContainerProvider)tileentity);
+	         player.addStat(Stats.INTERACT_WITH_FURNACE);
+	      }
 
-	}
-
+	   }
+	
 	/**
 	    * Called periodically clientside on blocks near the player to show effects (like furnace fire particles). Note that
 	    * this method is unrelated to {@link randomTick} and {@link #needsRandomTick}, and will always be called regardless
@@ -73,7 +65,12 @@ public class BrickFurnaceBlock extends FurnaceBaseBlock{
 	         worldIn.addParticle(ParticleTypes.FLAME, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
 	      }
 	   }
-
-
+	   
+	   @Override
+	   public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+		
+		   return new ModTileEntityTypes().BRICK_FURNACE.get().create();
+		    
+	   }
 
 }

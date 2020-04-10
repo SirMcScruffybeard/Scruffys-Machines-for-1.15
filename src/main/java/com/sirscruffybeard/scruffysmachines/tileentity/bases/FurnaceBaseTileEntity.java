@@ -1,102 +1,67 @@
 package com.sirscruffybeard.scruffysmachines.tileentity.bases;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.ItemStack;
+import net.minecraft.inventory.IRecipeHelperPopulator;
+import net.minecraft.inventory.IRecipeHolder;
+import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.crafting.AbstractCookingRecipe;
+import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.LockableTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.World;
+import net.minecraft.util.IIntArray;
 
-public abstract class FurnaceBaseTileEntity extends LockableTileEntity implements INamedContainerProvider {
+public abstract class FurnaceBaseTileEntity extends LockableTileEntity implements ISidedInventory, IRecipeHolder, IRecipeHelperPopulator, ITickableTileEntity {
 
-	public FurnaceBaseTileEntity(TileEntityType<?> tileEntityTypeIn) {
-		super(tileEntityTypeIn);
-		// TODO Auto-generated constructor stub
+	private static final int[] SLOTS_UP = new int[]{0};
+	private static final int[] SLOTS_DOWN = new int[]{2, 1};
+	private static final int[] SLOTS_HORIZONTAL = new int[]{1};
+
+	private int burnTime;
+	private int recipesUsed;
+	private int cookTime;
+	private int cookTimeTotal;
+
+	protected final IIntArray furnaceData = new IIntArray() {
+		public int get(int index) {
+			switch(index) {
+			case 0:
+				return FurnaceBaseTileEntity.this.burnTime;
+			case 1:
+				return FurnaceBaseTileEntity.this.recipesUsed;
+			case 2:
+				return FurnaceBaseTileEntity.this.cookTime;
+			case 3:
+				return FurnaceBaseTileEntity.this.cookTimeTotal;
+			default:
+				return 0;
+			}
+		}
+
+		public void set(int index, int value) {
+			switch(index) {
+			case 0:
+				FurnaceBaseTileEntity.this.burnTime = value;
+				break;
+			case 1:
+				FurnaceBaseTileEntity.this.recipesUsed = value;
+				break;
+			case 2:
+				FurnaceBaseTileEntity.this.cookTime = value;
+				break;
+			case 3:
+				FurnaceBaseTileEntity.this.cookTimeTotal = value;
+			}
+
+		}
+
+		public int size() {
+			return 4;
+		}
+	};
+
+	protected FurnaceBaseTileEntity(TileEntityType<?> typeIn, IRecipeType<? extends AbstractCookingRecipe> recipeTypeIn) {
+		super(typeIn);
+
 	}
-
-	@Override
-	public Container createMenu(int p_createMenu_1_, PlayerInventory p_createMenu_2_, PlayerEntity p_createMenu_3_) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ITextComponent getDisplayName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public NonNullList<ItemStack> getItems() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int getSizeInventory() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public ItemStack getStackInSlot(int index) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ItemStack decrStackSize(int index, int count) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ItemStack removeStackFromSlot(int index) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setInventorySlotContents(int index, ItemStack stack) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean isUsableByPlayer(PlayerEntity player) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void clear() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected ITextComponent getDefaultName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected Container createMenu(int id, PlayerInventory player) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	protected abstract void interactWith(World worldIn, BlockPos pos, PlayerEntity player);
 
 }

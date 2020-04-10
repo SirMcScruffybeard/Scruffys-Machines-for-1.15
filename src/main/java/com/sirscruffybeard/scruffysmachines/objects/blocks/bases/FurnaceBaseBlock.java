@@ -1,5 +1,6 @@
 package com.sirscruffybeard.scruffysmachines.objects.blocks.bases;
 
+import com.sirscruffybeard.scruffysmachines.tileentity.LeatherChestTileEntity;
 import com.sirscruffybeard.scruffysmachines.tileentity.bases.FurnaceBaseTileEntity;
 
 import net.minecraft.block.Block;
@@ -25,64 +26,28 @@ import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 public abstract class FurnaceBaseBlock extends Block{
 
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
-
 	public static final BooleanProperty LIT = RedstoneTorchBlock.LIT;
 
-	public FurnaceBaseBlock(Properties properties) {
+	public FurnaceBaseBlock(Block.Properties properties) {
+
 		super(properties);
 
-		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(LIT, false));
-
+		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(LIT, Boolean.valueOf(false)));
 	}
 
-
-	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-
 		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
 	}
+	
+	public abstract TileEntity createTileEntity(BlockState state, IBlockReader world);
 
-	/**
-	 * Returns the blockstate with the given rotation from the passed blockstate. If inapplicable, returns the passed
-	 * blockstate.
-	 * @deprecated call via {@link IBlockState#withRotation(Rotation)} whenever possible. Implementing/overriding is
-	 * fine.
-	 */
-	@Override
-	public BlockState rotate(BlockState state, Rotation rot) {return state.with(FACING, rot.rotate(state.get(FACING))); }
-
-	/**
-	 * Returns the blockstate with the given mirror of the passed blockstate. If inapplicable, returns the passed
-	 * blockstate.
-	 * @deprecated call via {@link IBlockState#withMirror(Mirror)} whenever possible. Implementing/overriding is fine.
-	 */
-	@Override
-	public BlockState mirror(BlockState state, Mirror mirrorIn) { return state.rotate(mirrorIn.toRotation(state.get(FACING))); }
-
-	@Override
-	public boolean hasTileEntity(BlockState state) {
-		return true;
-	}
-
-	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		builder.add(FACING, LIT);
-	}
-
-	/**********************************************************************************************************
-	 * onBlockActivated
-	 * @param BlockState state
-	 * @param World worldIn
-	 * @param BlockPos pos
-	 * @param PlayerEntity player
-	 * @return ActionResultType
-	 ***********************************************************************************************************/
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
 			Hand handIn, BlockRayTraceResult result) {
@@ -93,6 +58,7 @@ public abstract class FurnaceBaseBlock extends Block{
 
 			if(tile instanceof FurnaceBaseTileEntity) {
 				NetworkHooks.openGui((ServerPlayerEntity)player, (FurnaceBaseTileEntity)tile, pos);
+				this.interactWith(worldIn, pos, player);
 				return ActionResultType.SUCCESS;
 			}
 		}
@@ -100,14 +66,12 @@ public abstract class FurnaceBaseBlock extends Block{
 		return ActionResultType.FAIL;
 	}
 
-	/*************************************************************************************************************
-	 * onReplaced
-	 * @param BlockState state
-	 * @param World worldIn
-	 * @param BlockPos pos
-	 * @param BlockState newState
-	 * @param boolean isMoving
-	 **************************************************************************************************************/
+	protected abstract void interactWith(World worldIn, BlockPos pos, PlayerEntity player);
+
+	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+		builder.add(FACING, LIT);
+	}
+
 	@Override
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 
@@ -115,17 +79,11 @@ public abstract class FurnaceBaseBlock extends Block{
 
 			TileEntity te = worldIn.getTileEntity(pos);
 
-			if(te instanceof FurnaceBaseTileEntity) {
-				InventoryHelper.dropItems(worldIn, pos, ((FurnaceBaseTileEntity)te).getItems());
+			if(te instanceof LeatherChestTileEntity) {
+				InventoryHelper.dropItems(worldIn, pos, ((LeatherChestTileEntity)te).getItems());
 			}
 		}
 	}//onReplaced
-
-	/**
-	 * Interface for handling interaction with blocks that impliment AbstractFurnaceBlock. Called in onBlockActivated
-	 * inside AbstractFurnaceBlock.
-	 */
-	protected abstract void interactWith(World worldIn, BlockPos pos, PlayerEntity player);
 
 	/**
 	 * Called by ItemBlocks after a block is set in the world, to allow post-place logic
@@ -138,6 +96,34 @@ public abstract class FurnaceBaseBlock extends Block{
 			}
 		}
 
+	}
+
+	/**
+	 * The type of render function called. MODEL for mixed tesr and static model, MODELBLOCK_ANIMATED for TESR-only,
+	 * LIQUID for vanilla liquids, INVISIBLE to skip all rendering
+	 * @deprecated call via {@link IBlockState#getRenderType()} whenever possible. Implementing/overriding is fine.
+	 */
+	public BlockRenderType getRenderType(BlockState state) {
+		return BlockRenderType.MODEL;
+	}
+
+	/**
+	 * Returns the blockstate with the given rotation from the passed blockstate. If inapplicable, returns the passed
+	 * blockstate.
+	 * @deprecated call via {@link IBlockState#withRotation(Rotation)} whenever possible. Implementing/overriding is
+	 * fine.
+	 */
+	public BlockState rotate(BlockState state, Rotation rot) {
+		return state.with(FACING, rot.rotate(state.get(FACING)));
+	}
+
+	/**
+	 * Returns the blockstate with the given mirror of the passed blockstate. If inapplicable, returns the passed
+	 * blockstate.
+	 * @deprecated call via {@link IBlockState#withMirror(Mirror)} whenever possible. Implementing/overriding is fine.
+	 */
+	public BlockState mirror(BlockState state, Mirror mirrorIn) {
+		return state.rotate(mirrorIn.toRotation(state.get(FACING)));
 	}
 
 	/**
@@ -157,20 +143,10 @@ public abstract class FurnaceBaseBlock extends Block{
 	}
 
 	/**
-	 * The type of render function called. MODEL for mixed tesr and static model, MODELBLOCK_ANIMATED for TESR-only,
-	 * LIQUID for vanilla liquids, INVISIBLE to skip all rendering
-	 * @deprecated call via {@link IBlockState#getRenderType()} whenever possible. Implementing/overriding is fine.
-	 */
-	public BlockRenderType getRenderType(BlockState state) {
-		return BlockRenderType.MODEL;
-	}
-
-	/**
 	 * Amount of light emitted
 	 * @deprecated prefer calling {@link IBlockState#getLightValue()}
 	 */
 	public int getLightValue(BlockState state) {
 		return state.get(LIT) ? super.getLightValue(state) : 0;
 	}
-
 }//FurnaceBaseBlock

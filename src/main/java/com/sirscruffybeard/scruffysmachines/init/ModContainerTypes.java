@@ -17,6 +17,7 @@ public class ModContainerTypes {
 	
 	public static final RegistryObject<ContainerType<LeatherChestContainer>> LEATHER_CHEST = CONTAINER_TYPES
 			.register(LeatherChestBlock.ID, () -> IForgeContainerType.create(LeatherChestContainer::new));
+
 	
 
 }
