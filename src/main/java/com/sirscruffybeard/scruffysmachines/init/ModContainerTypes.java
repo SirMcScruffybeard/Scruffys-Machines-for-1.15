@@ -2,6 +2,7 @@ package com.sirscruffybeard.scruffysmachines.init;
 
 import com.sirscruffybeard.scruffysmachines.ScruffysMachines;
 import com.sirscruffybeard.scruffysmachines.objects.blocks.LeatherChestBlock;
+import com.sirscruffybeard.scruffysmachines.objects.container.BrickFurnaceContainer;
 import com.sirscruffybeard.scruffysmachines.objects.container.LeatherChestContainer;
 
 import net.minecraft.inventory.container.ContainerType;
@@ -19,5 +20,10 @@ public class ModContainerTypes {
 			.register(LeatherChestBlock.ID, () -> IForgeContainerType.create(LeatherChestContainer::new));
 
 	
+	
+	
+	
+	public static final RegistryObject<ContainerType<BrickFurnaceContainer>> BRICK_FURNACE = CONTAINER_TYPES
+			.register(BrickFurnaceContainer.ID, () -> IForgeContainerType.create(BrickFurnaceContainer::new));
 
 }

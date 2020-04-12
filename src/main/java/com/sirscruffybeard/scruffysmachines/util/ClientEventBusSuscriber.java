@@ -1,6 +1,7 @@
 package com.sirscruffybeard.scruffysmachines.util;
 
 import com.sirscruffybeard.scruffysmachines.ScruffysMachines;
+import com.sirscruffybeard.scruffysmachines.gui.BrickFurnaceScreen;
 import com.sirscruffybeard.scruffysmachines.gui.LeatherChestScreen;
 import com.sirscruffybeard.scruffysmachines.init.ModContainerTypes;
 
@@ -19,7 +20,7 @@ public class ClientEventBusSuscriber {
 		
 		ScreenManager.registerFactory(ModContainerTypes.LEATHER_CHEST.get(),LeatherChestScreen::new);
 		
-		
+		ScreenManager.registerFactory(ModContainerTypes.BRICK_FURNACE.get(),BrickFurnaceScreen::new);
 	}
 	
 }

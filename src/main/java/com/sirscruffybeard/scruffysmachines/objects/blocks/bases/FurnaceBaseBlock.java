@@ -45,27 +45,22 @@ public abstract class FurnaceBaseBlock extends Block{
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
 	}
-	
+
 	public abstract TileEntity createTileEntity(BlockState state, IBlockReader world);
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
-			Hand handIn, BlockRayTraceResult result) {
-
-		if(!worldIn.isRemote) {
-
-			TileEntity tile = worldIn.getTileEntity(pos);
-
-			if(tile instanceof FurnaceBaseTileEntity) {
-				NetworkHooks.openGui((ServerPlayerEntity)player, (FurnaceBaseTileEntity)tile, pos);
-				this.interactWith(worldIn, pos, player);
-				return ActionResultType.SUCCESS;
-			}
+	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		if (worldIn.isRemote) {
+			return ActionResultType.SUCCESS;
+		} else {
+			this.interactWith(worldIn, pos, player);
+			return ActionResultType.SUCCESS;
 		}
-
-		return ActionResultType.FAIL;
 	}
-
+	
+	@Override
+	public abstract boolean hasTileEntity(BlockState state);
+	
 	protected abstract void interactWith(World worldIn, BlockPos pos, PlayerEntity player);
 
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
