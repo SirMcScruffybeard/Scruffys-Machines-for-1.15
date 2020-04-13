@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "facing=north": { "model": "scruffysmachines:block/crumbler" },
-        "facing=south": { "model": "scruffysmachines:block/crumbler", "y": 180 },
-        "facing=west":  { "model": "scruffysmachines:block/crumbler", "y": 270 },
-        "facing=east":  { "model": "scruffysmachines:block/crumbler", "y": 90 }
-    }
-}

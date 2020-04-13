@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "scruffysmachines:stone_dust_item"
-  },
-  "result": "scruffysmachines:oven_brick_item",
-  "experience": 2.0,
-  "cookingtime": 250
-}
