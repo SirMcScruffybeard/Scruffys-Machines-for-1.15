@@ -2,7 +2,7 @@
 	"item.scruffysmachines.iron_rivet_item": "Iron Rivet",
 	
 	"item.scruffysmachines.stone_dust_item": "Stone Dust",
-	
+	"item.scruffysmachines.oven_brick_item": "Oven Brick",
 	
 	
 	
@@ -11,8 +11,8 @@
 	"item.scruffysmachines.iron_steam_pod_item": "Iron Steam Pod",
 	
 	
-	
-	
+	"item.scruffysmachines.trimmed_leather_item": "Trimmed Leather",
+	"item.scruffysmachines.leather_scrap_item": "Leather Scrap",
 	
 	"block.scruffysmachines.oven_bricks_block": "Oven Bricks",
 	"block.scruffysmachines.leather_block": "Leather Block",

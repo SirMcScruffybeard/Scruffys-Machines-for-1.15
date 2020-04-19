@@ -15,7 +15,10 @@ public class ItemInit {
 
 	public static RegistryObject<Item> STONE_DUST = ITEMS.register("stone_dust_item", () -> new Item(new Item.Properties().group(ScruffysMachinesItemGroup.instance)));
 	
+	public static RegistryObject<Item> OVEN_BRICK = ITEMS.register("oven_brick_item", () -> new Item(new Item.Properties().group(ScruffysMachinesItemGroup.instance)));
 	
+	public static RegistryObject<Item> TRIMMED_LEATHER = ITEMS.register("trimmed_leather_item", () -> new Item(new Item.Properties().group(ScruffysMachinesItemGroup.instance)));
+	public static RegistryObject<Item> LEATHER_SCRAP = ITEMS.register("leather_scrap_item", () -> new Item(new Item.Properties().group(ScruffysMachinesItemGroup.instance)));
 	
 	
 	public static RegistryObject<Item> IRON_RIVIT = ITEMS.register(IronRivitItem.ID, () -> new IronRivitItem(new Item.Properties().group(ScruffysMachinesItemGroup.instance)));

@@ -1,0 +1,34 @@
+{
+    "type": "minecraft:crafting_shaped",
+   
+    "pattern":
+    [
+        "IWI",
+        "SSS",
+        "ISI"
+    ],
+   
+    "key":
+    {
+        "I":
+        {
+            "item": "scruffysmachines:iron_rivet_item"
+        },
+
+        "W":
+        {
+            "item": "minecraft:stick"
+        },
+        
+        "S":
+    	{
+    		"item": "minecraft:stone_slab"
+    	}
+    },
+   
+    "result":
+    {
+        "item": "scruffysmachines:crumbler",
+        "count": 1
+    }
+}

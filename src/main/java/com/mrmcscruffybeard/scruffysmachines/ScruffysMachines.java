@@ -96,7 +96,7 @@ public class ScruffysMachines
     	@Override
     	public ItemStack createIcon() {
     		
-    		return new ItemStack(ItemInit.IRON_RIVIT.get());
+    		return new ItemStack(BlockInit.LEATHER_BLOCK.get());
     	}
     }
 

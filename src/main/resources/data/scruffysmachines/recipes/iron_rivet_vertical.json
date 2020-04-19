@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+   
+    "pattern":
+    [
+        "N",
+        "N"
+    ],
+   
+    "key":
+    {
+        "N":
+        {
+            "item": "minecraft:iron_nugget"
+        }
+    },
+   
+    "result":
+    {
+        "item": "scruffysmachines:iron_rivet_item",
+        "count": 2
+    }
+}

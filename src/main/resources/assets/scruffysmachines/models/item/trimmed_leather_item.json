@@ -1,0 +1,7 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0" : "scruffysmachines:item/trimmed_leather_item"
+    }
+
+}

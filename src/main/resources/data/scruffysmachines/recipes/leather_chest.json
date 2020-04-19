@@ -1,0 +1,34 @@
+{
+    "type": "minecraft:crafting_shaped",
+   
+    "pattern":
+    [
+        "ILI",
+        "LCL",
+        "ILI"
+    ],
+   
+    "key":
+    {
+        "I":
+        {
+            "item": "scruffysmachines:iron_rivet_item"
+        },
+
+        "C":
+        {
+            "item": "minecraft:chest"
+        },
+        
+        "L":
+    	{
+    		"item": "minecraft:leather"
+    	}
+    },
+   
+    "result":
+    {
+        "item": "scruffysmachines:leather_chest",
+        "count": 1
+    }
+}

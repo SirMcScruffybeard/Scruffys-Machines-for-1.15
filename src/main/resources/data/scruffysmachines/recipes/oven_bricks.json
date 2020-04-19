@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+   
+    "pattern":
+    [
+        "BB",
+        "BB"
+    ],
+   
+    "key":
+    {
+        "B":
+        {
+            "item": "scruffysmachines:oven_brick_item"
+        }
+    },
+   
+    "result":
+    {
+        "item": "scruffysmachines:oven_bricks_block",
+        "count": 1
+    }
+}
