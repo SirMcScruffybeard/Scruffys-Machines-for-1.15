@@ -80,11 +80,7 @@ public class BrickFurnaceTileEntity extends LockableTileEntity implements INamed
 		this(ModTileEntityTypes.BRICK_FURNACE.get(), IRecipeType.SMELTING);
 	}
 
-	/************************************************
-	 * getBurnTime()
-	 * 
-	 * @return int burnTime
-	 *************************************************/
+
 	public int getBurnTime() { return this.burnTime;}
 
 	public void setBurnTime(int time) {this.burnTime = time;}
@@ -379,7 +375,7 @@ public class BrickFurnaceTileEntity extends LockableTileEntity implements INamed
 	 * clear()
 	 *********************************************/
 	@Override
-	public void clear() { this.contents.clear(); }
+	public void clear() { contents.clear();	}
 
 	/*********************************************************
 	 * fillStackedContents()
@@ -422,7 +418,7 @@ public class BrickFurnaceTileEntity extends LockableTileEntity implements INamed
 		return new BrickFurnaceContainer(windowId, playerInventoryIn, this);
 	}
 
-	public NonNullList<ItemStack> getItems() { return this.contents; }
+	public NonNullList<ItemStack> getItemList() { return this.contents; }
 
 	/*******************************
 	 * remove()
@@ -619,6 +615,11 @@ public class BrickFurnaceTileEntity extends LockableTileEntity implements INamed
 		}
 		
 		return true;
+	}
+	
+	public IItemHandlerModifiable getItems() {
+		
+		return this.items;
 	}
 
 }//BrickFurnaceTileEntity

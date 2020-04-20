@@ -2,6 +2,7 @@ package com.mrmcscruffybeard.scruffysmachines.init;
 
 import com.mrmcscruffybeard.scruffysmachines.ScruffysMachines;
 import com.mrmcscruffybeard.scruffysmachines.objects.blocks.BrickFurnaceBlock;
+import com.mrmcscruffybeard.scruffysmachines.objects.blocks.LeatherChestBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -25,5 +26,9 @@ public class BlockInit {
 	public static final RegistryObject<Block> BRICK_FURNACE = BLOCKS.register(BrickFurnaceBlock.ID, () -> 
 			new BrickFurnaceBlock(Block.Properties.create(Material.ROCK)));
 	
+	
+	
+	public static final RegistryObject<Block> LEATHER_CHEST = BLOCKS.register(LeatherChestBlock.ID, () -> new LeatherChestBlock(Block.Properties.create(LeatherChestBlock.MATERIAL).
+			hardnessAndResistance(LeatherChestBlock.HARDNESS, LeatherChestBlock.RESISTANCE).sound(LeatherChestBlock.SOUND)));
 	
 }//BlockInit

@@ -27,6 +27,7 @@
 	"block.scruffysmachines.crumbler": "Crumbler",
 	
 	"block.scruffysmachines.brick_furnace": "Brick Furnace",
+	"container.brick_furnace": "Brick Furnace",
 	
 	"itemGroup.scruffysmachinestab": "Scruffy's Machines"
 }

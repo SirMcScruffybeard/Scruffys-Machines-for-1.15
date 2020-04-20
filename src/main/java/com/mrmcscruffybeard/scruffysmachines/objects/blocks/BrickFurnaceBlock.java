@@ -77,7 +77,7 @@ public class BrickFurnaceBlock extends Block {
 			TileEntity te = worldIn.getTileEntity(pos);
 
 			if(te instanceof BrickFurnaceTileEntity) {
-				InventoryHelper.dropItems(worldIn, pos, ((BrickFurnaceTileEntity)te).getItems());
+				InventoryHelper.dropItems(worldIn, pos, ((BrickFurnaceTileEntity)te).getItemList());
 			}
 		}
 	}//onReplaced
