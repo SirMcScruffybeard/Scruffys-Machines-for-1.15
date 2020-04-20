@@ -20,7 +20,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class BrickFurnaceScreen extends ContainerScreen<BrickFurnaceContainer> implements IRecipeShownListener{
 
-	private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(ScruffysMachines.MOD_ID, "textures/gui/brick_furnace_gui.png");
+	private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(ScruffysMachines.MOD_ID, "textures/gui/brick_furnace_screen.png");
 
 	private static final ResourceLocation RECIPE_BUTTON = new ResourceLocation("textures/gui/recipe_button.png");
 

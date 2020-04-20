@@ -45,6 +45,7 @@ public class BrickFurnaceBlock extends Block {
 
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 	public static final BooleanProperty LIT = RedstoneTorchBlock.LIT;
+	
 
 	public BrickFurnaceBlock(Properties properties) {
 		super(properties);
@@ -53,11 +54,9 @@ public class BrickFurnaceBlock extends Block {
 
 	}
 
-	@Override
-	public BlockState getStateForPlacement(BlockItemUseContext context) {
-
-		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
-	}
+	 public BlockState getStateForPlacement(BlockItemUseContext context) {
+	      return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+	   }
 
 	@Override
 	public boolean hasTileEntity(BlockState state) {

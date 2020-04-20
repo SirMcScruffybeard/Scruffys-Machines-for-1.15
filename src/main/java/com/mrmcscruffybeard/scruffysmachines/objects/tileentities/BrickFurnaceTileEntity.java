@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.google.common.collect.Lists;
@@ -17,6 +16,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
@@ -38,13 +38,15 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
-public class BrickFurnaceTileEntity extends LockableTileEntity implements INamedContainerProvider, ITickableTileEntity{
+public class BrickFurnaceTileEntity extends LockableTileEntity implements INamedContainerProvider, ITickableTileEntity, ISidedInventory{
+
+	private static final int[] SLOTS_UP = new int[]{0};
+	private static final int[] SLOTS_DOWN = new int[]{2, 1};
+	private static final int[] SLOTS_HORIZONTAL = new int[]{1};
 
 	public static final String ID = BrickFurnaceBlock.ID;
 
@@ -67,6 +69,9 @@ public class BrickFurnaceTileEntity extends LockableTileEntity implements INamed
 	private IItemHandlerModifiable items = createHandler();
 	private LazyOptional<IItemHandlerModifiable> itemHandler = LazyOptional.of(() -> items);
 
+	net.minecraftforge.common.util.LazyOptional<? extends net.minecraftforge.items.IItemHandler>[] handlers =
+			net.minecraftforge.items.wrapper.SidedInvWrapper.create(this, Direction.UP, Direction.DOWN, Direction.NORTH);
+
 	private final Map<ResourceLocation, Integer> recipeUseCounts = Maps.newHashMap();
 
 	public BrickFurnaceTileEntity(TileEntityType<?> tileEntityTypeIn, IRecipeType<? extends AbstractCookingRecipe> typeIn) {
@@ -85,7 +90,7 @@ public class BrickFurnaceTileEntity extends LockableTileEntity implements INamed
 
 	public void setBurnTime(int time) {this.burnTime = time;}
 
-	public int getRecipesUsed() {return this.getRecipesUsed();}
+	public int getRecipesUsed() {return this.recipesUsed;}
 
 	public void setRecipesUsed(int recipies) {this.recipesUsed = recipies;}
 
@@ -558,6 +563,10 @@ public class BrickFurnaceTileEntity extends LockableTileEntity implements INamed
 		return this.itemHandler;
 	}
 
+	/*****************************************************************************************************************
+	 * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot. For
+	 * guis use Slot.isItemValid
+	 *****************************************************************************************************************/
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
 
 		if(index == this.outputIndex) {
@@ -572,26 +581,27 @@ public class BrickFurnaceTileEntity extends LockableTileEntity implements INamed
 
 		else {
 
-			ItemStack itemStack = this.contents.get(1);
+			ItemStack itemStack = this.contents.get(fuelIndex);
 			return isFuel(stack) || stack.getItem() == Items.BUCKET && itemStack.getItem() != Items.BUCKET;
 		}
 	}
 
+
 	/**********************************************************************************************
 	 * getCapability()
 	 * 
-	 * @param Capability<T> cap
-	 * 
-	 * @param Direction side
 	 **********************************************************************************************/
 	@Override
-	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nonnull Direction side) {
-
-		if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-			return itemHandler.cast();
+	public <T> net.minecraftforge.common.util.LazyOptional<T> getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, @Nullable Direction facing) {
+		if (!this.removed && facing != null && capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+			if (facing == Direction.UP)
+				return handlers[0].cast();
+			else if (facing == Direction.DOWN)
+				return handlers[1].cast();
+			else
+				return handlers[2].cast();
 		}
-
-		return super.getCapability(cap, side);
+		return super.getCapability(capability, facing);
 	}
 
 	public void onCrafting(PlayerEntity player) {	}
@@ -602,24 +612,63 @@ public class BrickFurnaceTileEntity extends LockableTileEntity implements INamed
 	 * @return The number of slots in the inventory.
 	 ************************************************************/
 	public int getSizeInventory() { return this.contents.size(); }
-	
-	
+
+
 	public boolean isEmpty() {
-		
+
 		for(ItemStack stack : this.contents) {
-			
+
 			if(!stack.isEmpty()) {
-				
+
 				return false;
 			}
 		}
-		
+
 		return true;
 	}
-	
+
 	public IItemHandlerModifiable getItems() {
-		
+
 		return this.items;
+	}
+
+	@Override
+	public int[] getSlotsForFace(Direction side) {
+
+		if(side == Direction.DOWN) {
+			return SLOTS_DOWN;
+		}
+		else {
+			return side == Direction.UP ? SLOTS_UP : SLOTS_HORIZONTAL;
+		}
+	}
+
+	/*********************************************************************************************
+	 * Returns true if automation can insert the given item in the given slot from the given side.
+	 *********************************************************************************************/
+	@Override
+	public boolean canInsertItem(int index, ItemStack stackIn, Direction direction) {
+
+		return this.isItemValidForSlot(index, stackIn);
+	}
+
+	/**********************************************************************************************
+	 * Returns true if automation can extract the given item in the given slot from the given side.
+	 **********************************************************************************************/
+	@Override
+	public boolean canExtractItem(int index, ItemStack stack, Direction direction) {
+
+		if(direction == Direction.DOWN && index == 1) {
+
+			Item item = stack.getItem();
+
+			if (item != Items.WATER_BUCKET && item != Items.BUCKET) {
+
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 }//BrickFurnaceTileEntity

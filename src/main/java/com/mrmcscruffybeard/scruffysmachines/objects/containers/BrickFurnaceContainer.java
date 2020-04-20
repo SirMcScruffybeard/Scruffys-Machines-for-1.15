@@ -66,12 +66,12 @@ public class BrickFurnaceContainer extends RecipeBookContainer<IInventory> {
 
 		this.world = tileEntityIn.getWorld();
 
-		int inX = 26;
+		int inX = 47;
 		int inY = 16;
 		int inIndex = 0;
 		this.addSlot(new Slot(tileEntityIn, inIndex, inX, inY));
 
-		int fuelX = 26;
+		int fuelX = 47;
 		int fuelY = 61;
 		int fuelIndex = 1;
 		this.addSlot(new ModFurnaceFuelSlot(this, tileEntityIn, fuelIndex, fuelX, fuelY));
