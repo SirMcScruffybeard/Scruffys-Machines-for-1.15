@@ -6,6 +6,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.AbstractFurnaceTileEntity;
+import net.minecraftforge.fml.hooks.BasicEventHooks;
 
 public class ModFurnaceResultSlot extends Slot {
 
@@ -25,26 +27,28 @@ public class ModFurnaceResultSlot extends Slot {
 
 	}
 
-	public boolean isItemValidForSlot(ItemStack stack) { return false; }
+	@Override
+	public boolean isItemValid(ItemStack stack) { return false; }
 
-	/********************************************************************************************************************
+	/**
 	 * Decrease the size of the stack in slot (first int arg) by the amount of the second int arg. Returns the new stack.
-	 ********************************************************************************************************************/
-	public ItemStack decrStackSize (int amount) {
+	 */
+	public ItemStack decrStackSize(int amount) {
 
-		if(this.getHasStack()) {
+		if (this.getHasStack()) {
 
-			this.removeCount += Math.min(amount, this.getStack().getCount());	
+			this.removeCount += Math.min(amount, this.getStack().getCount());
 		}
 
 		return super.decrStackSize(amount);
 	}
 
-	public ItemStack onTake(PlayerEntity player, ItemStack stack) {
+	@Override
+	public ItemStack onTake(PlayerEntity thePlayer, ItemStack stack) {
 
 		this.onCrafting(stack);
 
-		super.onTake(player, stack);
+		super.onTake(thePlayer, stack);
 
 		return stack;
 	}
@@ -58,22 +62,24 @@ public class ModFurnaceResultSlot extends Slot {
 		this.removeCount += amount;
 
 		this.onCrafting(stack);
-
 	}
 
 	/******************************************************************************************
 	 * the itemStack passed in is the output - ie, iron ingots, and pickaxes, not ore and wood.
 	 ******************************************************************************************/
+	@Override
 	protected void onCrafting(ItemStack stack) {
 		
 		stack.onCrafting(this.player.world, this.player, this.removeCount);
 		
-		if(!this.player.world.isRemote() && this.inventory instanceof BrickFurnaceTileEntity) {
+		if (!this.player.world.isRemote && this.inventory instanceof AbstractFurnaceTileEntity) {
 			
-			((BrickFurnaceTileEntity)this.inventory).processRecipe(player);
+			((AbstractFurnaceTileEntity)this.inventory).func_213995_d(this.player);
+			
 		}
-		
+
 		this.removeCount = 0;
-		net.minecraftforge.fml.hooks.BasicEventHooks.firePlayerSmeltedEvent(this.player, stack);
+		
+		BasicEventHooks.firePlayerSmeltedEvent(this.player, stack);
 	}
 }//ModFurnaceResultSlot

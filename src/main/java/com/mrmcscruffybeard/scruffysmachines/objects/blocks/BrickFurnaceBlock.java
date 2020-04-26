@@ -42,10 +42,9 @@ public class BrickFurnaceBlock extends Block {
 
 	public static final String ID = "brick_furnace";
 
-
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 	public static final BooleanProperty LIT = RedstoneTorchBlock.LIT;
-	
+
 
 	public BrickFurnaceBlock(Properties properties) {
 		super(properties);
@@ -54,9 +53,9 @@ public class BrickFurnaceBlock extends Block {
 
 	}
 
-	 public BlockState getStateForPlacement(BlockItemUseContext context) {
-	      return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
-	   }
+	public BlockState getStateForPlacement(BlockItemUseContext context) {
+		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+	}
 
 	@Override
 	public boolean hasTileEntity(BlockState state) {
@@ -86,7 +85,7 @@ public class BrickFurnaceBlock extends Block {
 
 		return ModTileEntityTypes.BRICK_FURNACE.get().create();
 	}
- 
+
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
 			Hand handIn, BlockRayTraceResult result) {
@@ -105,28 +104,6 @@ public class BrickFurnaceBlock extends Block {
 		return ActionResultType.FAIL;
 	}
 
-	@OnlyIn(Dist.CLIENT)
-	public void animateTick(BlockState state, World world, BlockPos pos, Random rand) {
-
-		if (state.get(BlockStateProperties.LIT)) { //If lit
-			double dX = (double) pos.getX() + 0.5D;
-			double dY = (double) pos.getY();
-			double dZ = (double) pos.getZ() + 0.5D;
-			if (rand.nextDouble() < 0.1D) {
-				world.playSound(dX, dY, dZ, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
-			}
-
-			Direction direction = state.get(BlockStateProperties.FACING);
-			Direction.Axis direction$axis = direction.getAxis();
-			double d3 = 0.52D;
-			double d4 = rand.nextDouble() * 0.6D - 0.3D;
-			double d5 = direction$axis == Direction.Axis.X ? (double) direction.getXOffset() * 0.52D : d4;
-			double d6 = rand.nextDouble() * 6.0D / 16.0D;
-			double d7 = direction$axis == Direction.Axis.Z ? (double) direction.getZOffset() * 0.52D : d4;
-			world.addParticle(ParticleTypes.SMOKE, dX + d5, dY + d6, dZ + d7, 0.0D, 0.0D, 0.0D);
-			world.addParticle(ParticleTypes.FLAME, dX + d5, dY + d6, dZ + d7, 0.0D, 0.0D, 0.0D);
-		}
-	}
 
 	@Override
 	public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack stack) {

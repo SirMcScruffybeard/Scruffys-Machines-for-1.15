@@ -38,9 +38,11 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.wrapper.InvWrapper;
+import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
 public class BrickFurnaceTileEntity extends LockableTileEntity implements INamedContainerProvider, ITickableTileEntity, ISidedInventory{
 
@@ -55,9 +57,9 @@ public class BrickFurnaceTileEntity extends LockableTileEntity implements INamed
 	private NonNullList<ItemStack> contents = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY);
 
 	//Index's for contents
-	private int rawMatIndex = 0;
-	private int fuelIndex =  1;
-	private int outputIndex = 2;
+	public static int MATERIAL = 0;
+	public static int FUEL =  1;
+	public static final int OUTPUT = 2;
 
 	private int burnTime;
 	private int recipesUsed;
@@ -69,8 +71,8 @@ public class BrickFurnaceTileEntity extends LockableTileEntity implements INamed
 	private IItemHandlerModifiable items = createHandler();
 	private LazyOptional<IItemHandlerModifiable> itemHandler = LazyOptional.of(() -> items);
 
-	net.minecraftforge.common.util.LazyOptional<? extends net.minecraftforge.items.IItemHandler>[] handlers =
-			net.minecraftforge.items.wrapper.SidedInvWrapper.create(this, Direction.UP, Direction.DOWN, Direction.NORTH);
+	private LazyOptional<? extends net.minecraftforge.items.IItemHandler>[] handlers =
+			SidedInvWrapper.create(this, Direction.UP, Direction.DOWN, Direction.NORTH);
 
 	private final Map<ResourceLocation, Integer> recipeUseCounts = Maps.newHashMap();
 
@@ -118,9 +120,9 @@ public class BrickFurnaceTileEntity extends LockableTileEntity implements INamed
 
 		if(this.world.isRemote) { //if not client
 
-			ItemStack fuelStack = this.contents.get(fuelIndex); //get second item stack in contents
+			ItemStack fuelStack = this.contents.get(FUEL); //get second item stack in contents
 
-			if(this.isBurning() || !fuelStack.isEmpty() && !this.contents.get(rawMatIndex).isEmpty()) {
+			if(this.isBurning() || !fuelStack.isEmpty() && !this.contents.get(MATERIAL).isEmpty()) {
 
 				IRecipe<?> recipe = world.getRecipeManager().getRecipe((IRecipeType<AbstractCookingRecipe>) this.recipeType, this, world).orElse(null);
 
@@ -134,7 +136,7 @@ public class BrickFurnaceTileEntity extends LockableTileEntity implements INamed
 
 						flag1 = true;
 
-						if(fuelStack.hasContainerItem()) { this.contents.set(fuelIndex, fuelStack.getContainerItem());} 
+						if(fuelStack.hasContainerItem()) { this.contents.set(FUEL, fuelStack.getContainerItem());} 
 
 						else if(!fuelStack.isEmpty()) {
 
@@ -144,7 +146,7 @@ public class BrickFurnaceTileEntity extends LockableTileEntity implements INamed
 
 							if(fuelStack.isEmpty()) { 
 
-								this.contents.set(fuelIndex, fuelStack.getContainerItem()); 
+								this.contents.set(FUEL, fuelStack.getContainerItem()); 
 
 							}//if fuelStack is empty
 						}//if fuelStack is not empty
@@ -198,7 +200,7 @@ public class BrickFurnaceTileEntity extends LockableTileEntity implements INamed
 
 	public boolean canSmelt(@Nullable IRecipe<?> recipeIn) {
 
-		if(!this.contents.get(rawMatIndex).isEmpty() && recipeIn != null) { //Make sure there is a raw material and recipe
+		if(!this.contents.get(MATERIAL).isEmpty() && recipeIn != null) { //Make sure there is a raw material and recipe
 
 			ItemStack result = recipeIn.getRecipeOutput();
 
@@ -206,7 +208,7 @@ public class BrickFurnaceTileEntity extends LockableTileEntity implements INamed
 
 			else { //Result not empty
 
-				ItemStack finishedStack = this.contents.get(outputIndex); //Item stack in output slot
+				ItemStack finishedStack = this.contents.get(OUTPUT); //Item stack in output slot
 
 				if(finishedStack.isEmpty()) { return true; } //If output is empty
 
@@ -259,22 +261,22 @@ public class BrickFurnaceTileEntity extends LockableTileEntity implements INamed
 
 		if(recipeIn != null && this.canSmelt(recipeIn)) { //if recipe and can smelt
 
-			ItemStack matStack = this.contents.get(rawMatIndex);
+			ItemStack matStack = this.contents.get(MATERIAL);
 			ItemStack output = recipeIn.getRecipeOutput();
-			ItemStack result = this.contents.get(outputIndex);
+			ItemStack result = this.contents.get(OUTPUT);
 
-			if(result.isEmpty()) { this.contents.set(outputIndex, output.copy()); }
+			if(result.isEmpty()) { this.contents.set(OUTPUT, output.copy()); }
 
 			else if(result.getItem() == output.getItem()) { result.grow(output.getCount()); }
 
 			if (!this.world.isRemote) { this.setRecipeUsed(recipeIn); }
 
-			if (matStack.getItem() == Blocks.WET_SPONGE.asItem() && !this.contents.get(fuelIndex).isEmpty() && this.contents.get(fuelIndex).getItem() == Items.BUCKET) {
+			if (matStack.getItem() == Blocks.WET_SPONGE.asItem() && !this.contents.get(FUEL).isEmpty() && this.contents.get(FUEL).getItem() == Items.BUCKET) {
 
-				this.contents.set(fuelIndex, new ItemStack(Items.WATER_BUCKET));
+				this.contents.set(FUEL, new ItemStack(Items.WATER_BUCKET));
 			}
 
-			matStack.shrink(rawMatIndex);
+			matStack.shrink(1);
 
 		}//recipe and can smelt
 	}
@@ -452,54 +454,60 @@ public class BrickFurnaceTileEntity extends LockableTileEntity implements INamed
 	}
 
 	public void read(CompoundNBT compound) {
+		
+	      super.read(compound);
+	      
+	      this.contents = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
+	      
+	      ItemStackHelper.loadAllItems(compound, this.contents);
+	      
+	      this.burnTime = compound.getInt("BurnTime");
+	      
+	      this.cookTime = compound.getInt("CookTime");
+	      
+	      this.cookTimeTotal = compound.getInt("CookTimeTotal");
+	      
+	      this.recipesUsed = this.getBurnTime(this.contents.get(1));
+	      
+	      int i = compound.getShort("RecipesUsedSize");
+	      
 
-		super.read(compound);
+	      for(int j = 0; j < i; ++j) {
+	         ResourceLocation resourcelocation = new ResourceLocation(compound.getString("RecipeLocation" + j));
+	         
+	         int k = compound.getInt("RecipeAmount" + j);
+	         
+	         this.recipeUseCounts.put(resourcelocation, k);
+	      }
 
-		this.contents = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
+	   }
 
-		ItemStackHelper.loadAllItems(compound, this.contents);
+	 public CompoundNBT write(CompoundNBT compound) {
+		 
+	      super.write(compound);
+	      
+	      compound.putInt("BurnTime", this.burnTime);
+	      
+	      compound.putInt("CookTime", this.cookTime);
+	      
+	      compound.putInt("CookTimeTotal", this.cookTimeTotal);
+	      
+	      ItemStackHelper.saveAllItems(compound, this.contents);
+	      
+	      compound.putShort("RecipesUsedSize", (short)this.recipeUseCounts.size());
+	      
+	      int i = 0;
 
-		this.burnTime = compound.getInt("BurnTime");
-		this.cookTime = compound.getInt("CookTime");
-		this.cookTimeTotal = compound.getInt("CookTimeTotal");
-		this.recipesUsed = this.getBurnTime(this.contents.get(this.fuelIndex));
+	      for(Entry<ResourceLocation, Integer> entry : this.recipeUseCounts.entrySet()) {
+	    	  
+	         compound.putString("RecipeLocation" + i, entry.getKey().toString());
+	         
+	         compound.putInt("RecipeAmount" + i, entry.getValue());
+	         ++i;
+	      }
 
-		int i = compound.getShort("RecipesUsedSize");
-
-		for (int n = 0; n < i; ++n) {
-
-			ResourceLocation resourceLocation = new ResourceLocation(compound.getString("RecipeLocation" + n));
-
-			this.recipeUseCounts.put(resourceLocation, compound.getInt("RecipeAmount" + n));
-		}
-	}//read
-
-
-	public CompoundNBT write(CompoundNBT compound) {
-
-		super.write(compound);
-
-		compound.putInt("BurnTime", this.burnTime);
-		compound.putInt("CookTime", this.cookTime);
-		compound.putInt("CookTimeTotal", this.cookTimeTotal);
-
-		ItemStackHelper.saveAllItems(compound, this.contents);
-
-		compound.putShort("RecipesUsedSize", (short)this.recipeUseCounts.size());
-
-		int i = 0;
-
-		for(Entry<ResourceLocation, Integer> entry : this.recipeUseCounts.entrySet()) {
-
-			compound.putString("RecipeLocation" + i, entry.getKey().toString());
-
-			compound.putInt("RecipeAmount" + i, entry.getValue());
-
-			++i;
-		}
-
-		return compound;
-	}
+	      return compound;
+	   }
 
 
 	public void processRecipe(PlayerEntity player) {
@@ -569,19 +577,20 @@ public class BrickFurnaceTileEntity extends LockableTileEntity implements INamed
 	 *****************************************************************************************************************/
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
 
-		if(index == this.outputIndex) {
+		if(index == OUTPUT) {
 
 			return false;
 		}
 
-		else if(index == fuelIndex) {
+		else if(index == FUEL) {
 
 			return true;
 		}
 
 		else {
 
-			ItemStack itemStack = this.contents.get(fuelIndex);
+			ItemStack itemStack = this.contents.get(FUEL);
+			
 			return isFuel(stack) || stack.getItem() == Items.BUCKET && itemStack.getItem() != Items.BUCKET;
 		}
 	}
@@ -592,14 +601,26 @@ public class BrickFurnaceTileEntity extends LockableTileEntity implements INamed
 	 * 
 	 **********************************************************************************************/
 	@Override
-	public <T> net.minecraftforge.common.util.LazyOptional<T> getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, @Nullable Direction facing) {
+	public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
+		
 		if (!this.removed && facing != null && capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-			if (facing == Direction.UP)
+		
+			if (facing == Direction.UP) {
+				
 				return handlers[0].cast();
-			else if (facing == Direction.DOWN)
+			}
+				
+				
+			else if (facing == Direction.DOWN) {
+				
 				return handlers[1].cast();
-			else
+			}
+				
+			else {
+				
 				return handlers[2].cast();
+			}
+				
 		}
 		return super.getCapability(capability, facing);
 	}
