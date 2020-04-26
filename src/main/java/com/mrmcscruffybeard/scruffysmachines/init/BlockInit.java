@@ -4,6 +4,7 @@ import com.mrmcscruffybeard.scruffysmachines.ScruffysMachines;
 import com.mrmcscruffybeard.scruffysmachines.objects.blocks.BrickFurnaceBlock;
 import com.mrmcscruffybeard.scruffysmachines.objects.blocks.CrumblerBlock;
 import com.mrmcscruffybeard.scruffysmachines.objects.blocks.LeatherChestBlock;
+import com.mrmcscruffybeard.scruffysmachines.objects.blocks.StoneWaterTankBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -29,11 +30,17 @@ public class BlockInit {
 	
 	
 	
-	public static final RegistryObject<Block> LEATHER_CHEST = BLOCKS.register(LeatherChestBlock.ID, () -> new LeatherChestBlock(Block.Properties.create(LeatherChestBlock.MATERIAL).
+	public static final RegistryObject<Block> LEATHER_CHEST = BLOCKS.register(LeatherChestBlock.ID, () -> 
+			new LeatherChestBlock(Block.Properties.create(LeatherChestBlock.MATERIAL).
 			hardnessAndResistance(LeatherChestBlock.HARDNESS, LeatherChestBlock.RESISTANCE).sound(LeatherChestBlock.SOUND)));
 	
 	
 	public static final RegistryObject<Block> CRUMBLER = BLOCKS.register(CrumblerBlock.ID, () -> 
 			new CrumblerBlock(Block.Properties.create(Material.ROCK)));
 	
+	
+	public static final RegistryObject<Block> STONE_WATER_TANK = BLOCKS.register(StoneWaterTankBlock.ID, () -> 
+			new StoneWaterTankBlock(Block.Properties.create(StoneWaterTankBlock.MATERIAL).sound(StoneWaterTankBlock.SOUND)));
+
+
 }//BlockInit
