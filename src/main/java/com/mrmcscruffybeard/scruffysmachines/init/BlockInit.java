@@ -7,6 +7,7 @@ import com.mrmcscruffybeard.scruffysmachines.objects.blocks.LeatherChestBlock;
 import com.mrmcscruffybeard.scruffysmachines.objects.blocks.StoneWaterTankBlock;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.ToolType;
@@ -40,7 +41,7 @@ public class BlockInit {
 	
 	
 	public static final RegistryObject<Block> STONE_WATER_TANK = BLOCKS.register(StoneWaterTankBlock.ID, () -> 
-			new StoneWaterTankBlock(Block.Properties.create(StoneWaterTankBlock.MATERIAL).sound(StoneWaterTankBlock.SOUND)));
+			new StoneWaterTankBlock(Block.Properties.create(StoneWaterTankBlock.MATERIAL)));
 
 
 }//BlockInit

@@ -49,6 +49,7 @@ public class LeatherChestTileEntity extends LockableLootTileEntity {
 	 *********************************************************/
 	public LeatherChestTileEntity(TileEntityType<?> typeIn) {
 		super(typeIn);
+		
 	}
 
 	/*********************************************************

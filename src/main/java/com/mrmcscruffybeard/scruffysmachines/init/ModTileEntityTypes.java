@@ -26,5 +26,8 @@ public class ModTileEntityTypes {
 			.register(LeatherChestTileEntity.ID, () -> TileEntityType.Builder.create(LeatherChestTileEntity::new,  BlockInit.LEATHER_CHEST.get()).build(null));
 
 	public static final RegistryObject<TileEntityType<StoneWaterTankTileEntity>> STONE_WATER_TANK = TILE_ENTITY_TYPES
-			.register(StoneWaterTankTileEntity.ID, () -> TileEntityType.Builder.create(StoneWaterTankTileEntity::new, BlockInit.STONE_WATER_TANK.get()).build(null));
+			.register(StoneWaterTankTileEntity.ID, () -> TileEntityType.Builder.create(StoneWaterTankTileEntity::new,  BlockInit.STONE_WATER_TANK.get()).build(null));
+
+	
+	
 }//ModTileEntityTypes
