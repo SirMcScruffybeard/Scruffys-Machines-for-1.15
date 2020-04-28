@@ -41,7 +41,7 @@ public class BlockInit {
 	
 	
 	public static final RegistryObject<Block> STONE_WATER_TANK = BLOCKS.register(StoneWaterTankBlock.ID, () -> 
-			new StoneWaterTankBlock(Block.Properties.create(StoneWaterTankBlock.MATERIAL)));
+			new StoneWaterTankBlock(Block.Properties.create(StoneWaterTankBlock.MATERIAL).from(Blocks.STONE)));
 
 
 }//BlockInit

@@ -1,8 +1,8 @@
 package com.mrmcscruffybeard.scruffysmachines.objects.blocks;
 
 import com.mrmcscruffybeard.scruffysmachines.init.ModTileEntityTypes;
+import com.mrmcscruffybeard.scruffysmachines.objects.blocks.bases.FluidTankBlockBase;
 import com.mrmcscruffybeard.scruffysmachines.objects.tileentities.StoneWaterTankTileEntity;
-import com.mrmcscruffybeard.scruffysmachines.util.helpers.BucketSwapHelper;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -23,9 +23,9 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
-public class StoneWaterTankBlock extends Block {
+public class StoneWaterTankBlock extends FluidTankBlockBase {
 
-	public static String ID = "stone_water_tank";
+	public static String ID = "stone_water" + ID_TANK;
 
 	public static final Material MATERIAL = Material.ROCK;
 
@@ -48,15 +48,9 @@ public class StoneWaterTankBlock extends Block {
 	protected void fillStateContainer(Builder<Block, BlockState> builder) { builder.add(FACING);}
 
 	@Override
-	public boolean hasTileEntity(BlockState state) {
-
-		return true; 
-	}
-
-	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) { 
 
-	return ModTileEntityTypes.STONE_WATER_TANK.get().create();
+		return ModTileEntityTypes.STONE_WATER_TANK.get().create();
 	}
 
 	@Override
@@ -71,22 +65,40 @@ public class StoneWaterTankBlock extends Block {
 
 			if (tile instanceof StoneWaterTankTileEntity) {
 
+				if (StoneWaterTankTileEntity.isValidBucket(heldItem)) {
 
-				if(heldItem == Items.WATER_BUCKET) { 
+					if(heldItem == Items.WATER_BUCKET) { 
 
-					((StoneWaterTankTileEntity) tile).fillWithBucket(player);
+						((StoneWaterTankTileEntity) tile).fillWithBucket(player);
 
+					}
+
+					if(heldItem == Items.BUCKET) {
+
+						((StoneWaterTankTileEntity) tile).drainWithBucket(player);
+
+					}
 				}
-
-				if(heldItem == Items.BUCKET) {
-
-					((StoneWaterTankTileEntity) tile).drainWithBucket(player);
-
-				}
-
-
 			}
 		}
+
 		return ActionResultType.SUCCESS;
+		
+	}//OnBlockActivated
+
+	@Override
+	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+
+		if (state.getBlock() != newState.getBlock()) {
+
+			TileEntity tile = worldIn.getTileEntity(pos);
+
+			if(tile instanceof StoneWaterTankTileEntity && ((StoneWaterTankTileEntity) tile).canSpill()) {
+
+				((StoneWaterTankTileEntity) tile).spill(pos, worldIn, state);
+
+			} //instance of
+		}
 	}
-}
+
+}//class
