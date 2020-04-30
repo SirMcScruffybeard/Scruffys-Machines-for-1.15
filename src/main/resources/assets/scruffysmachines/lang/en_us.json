@@ -14,6 +14,9 @@
 	"item.scruffysmachines.trimmed_leather_item": "Trimmed Leather",
 	"item.scruffysmachines.leather_scrap_item": "Leather Scrap",
 	
+	"item.scruffysmachines.wood_dipstick_item": "Wood Dipstick",
+	
+	
 	"block.scruffysmachines.oven_bricks_block": "Oven Bricks",
 	"block.scruffysmachines.leather_block": "Leather Block",
 	
@@ -30,4 +33,6 @@
 	"container.brick_furnace": "Brick Furnace",
 	
 	"itemGroup.scruffysmachinestab": "Scruffy's Machines"
+	
 }
+

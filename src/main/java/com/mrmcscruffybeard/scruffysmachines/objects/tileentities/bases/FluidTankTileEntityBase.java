@@ -3,6 +3,7 @@ package com.mrmcscruffybeard.scruffysmachines.objects.tileentities.bases;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.mrmcscruffybeard.scruffysmachines.objects.tanks.ModFluidTank;
 import com.mrmcscruffybeard.scruffysmachines.objects.tanks.WaterTank;
 
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,6 +14,7 @@ import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidAttributes;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
@@ -21,19 +23,21 @@ public abstract class FluidTankTileEntityBase extends TileEntity{
 
 	public static final int BUCKET_VOLUME = FluidAttributes.BUCKET_VOLUME;
 
-	private int capacity = BUCKET_VOLUME;
+	protected ModFluidTank tank;
 
-	protected final WaterTank TANK = new WaterTank(BUCKET_VOLUME);
+	protected final LazyOptional<IFluidHandler> holder = LazyOptional.of(() -> tank);
 
-	protected final LazyOptional<IFluidHandler> holder = LazyOptional.of(() -> TANK);
-
-	public FluidTankTileEntityBase(final TileEntityType<?> tileEntityTypeIn, final int numBuckets) {
+	public FluidTankTileEntityBase(final TileEntityType<?> tileEntityTypeIn, final ModFluidTank tankIn) {
 
 		super(tileEntityTypeIn);
 
-		this.capacity *= numBuckets;
+		this.tank = tankIn;
 
-		TANK.setCapacity(this.capacity);
+	}
+
+	public void setInTankTileEntity(FluidTankTileEntityBase tileIn) {
+
+		tank.setTankTileEntity(tileIn);
 	}
 
 	@Override
@@ -41,7 +45,7 @@ public abstract class FluidTankTileEntityBase extends TileEntity{
 
 		super.read(compound);
 
-		TANK.readFromNBT(compound);
+		tank.readFromNBT(compound);
 
 	}
 
@@ -50,7 +54,7 @@ public abstract class FluidTankTileEntityBase extends TileEntity{
 
 		compound = super.write(compound);
 
-		TANK.writeToNBT(compound);
+		tank.writeToNBT(compound);
 
 		return compound;
 
@@ -68,23 +72,63 @@ public abstract class FluidTankTileEntityBase extends TileEntity{
 		return super.getCapability(cap, facing);
 	}
 
-	public void drainWithBucket() {
-
-
-	}
-	
-	public static boolean canHoldBucketVolume(FluidTank tank) {
+	public static boolean canHoldBucketVolume(ModFluidTank tank) {
 
 		return tank.getSpace() >= BUCKET_VOLUME;
 	}
-	
-	public static boolean isHoldingBucketVolume(FluidTank tank) {
-		
-		return tank.getFluidAmount() >= BUCKET_VOLUME;
+
+	public static boolean isHoldingBucketVolume(ModFluidTank tankIn) {
+
+		return tankIn.getFluidAmount() >= BUCKET_VOLUME;
 	}
-	
+
 	public abstract void fillWithBucket(PlayerEntity player);
-	
+
 	public abstract void drainWithBucket(PlayerEntity player);
+
+	public boolean canSpill() {
+
+		return true;
+	}
+
+	public boolean hasFluidTank() {
+
+		return true;
+	}
+
+	public int getFluidAmount() {
+
+		return tank.getFluidAmount();
+	}
+
+	/*****************************
+	 * getFluid()
+	 * 
+	 * @return FluidStack
+	 *****************************/
+	public FluidStack getFluid() {
+
+		return tank.getFluid();
+	}
+
+	public boolean isFull() {
+
+		return tank.isFull();
+	}
+
+	public boolean isEmpty() {
+
+		return tank.isEmpty();
+	}
+
+	public int getSpace() {
+
+		return tank.getSpace();
+	}
+
+	public ModFluidTank getTank() {
+
+		return tank;
+	}
 
 }

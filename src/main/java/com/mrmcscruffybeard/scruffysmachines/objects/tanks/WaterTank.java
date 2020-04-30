@@ -1,31 +1,36 @@
 package com.mrmcscruffybeard.scruffysmachines.objects.tanks;
 
+import com.mrmcscruffybeard.scruffysmachines.objects.tileentities.bases.FluidTankTileEntityBase;
+
 import net.minecraft.fluid.Fluids;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 
-public class WaterTank extends FluidTank implements IFluidHandler, IFluidTank{
-	
-	public static int BUCKET_VOLUME = FluidAttributes.BUCKET_VOLUME;
+public class WaterTank extends ModFluidTank implements IFluidHandler, IFluidTank{
 	
 	public WaterTank(final int capacity) {
 		super(capacity);
 		
 	}
 	
-	@Override
-	public boolean isFluidValid(int tank, FluidStack stack) {
+	public WaterTank(final int capacity, FluidTankTileEntityBase tileIn) {
+		super(capacity);
 		
-		return this.isFluidValid(stack);
 	}
 	
-	@Override
-	public boolean isFluidValid(FluidStack stack) {
+	
+	public boolean isWaterValid(FluidStack stack) {
 		
-		return super.isFluidValid(stack) && stack.isFluidEqual(new FluidStack(Fluids.WATER, 1));
+		return super.isFluidValid(stack) && isWater(stack);
+	}
+	
+	public static boolean isWater(FluidStack stack) {
+		
+		return stack.isFluidEqual(new FluidStack(Fluids.WATER, 1));
 	}
 	
 	@Override
@@ -40,13 +45,13 @@ public class WaterTank extends FluidTank implements IFluidHandler, IFluidTank{
 		
 		int amountIn = resource.getAmount();
 		
-		if (resource.isEmpty() || !isFluidValid(resource)) { return 0; }
+		if (resource.isEmpty() || !isWaterValid(resource)) { return 0; }
 		
 		if (action.simulate() ) {
 			
 			if (fluid.isEmpty()) { return Math.min(capacity, amountIn); }
 			
-			if (!fluid.isFluidEqual(resource)) { return 0; }
+			if (!isWater(resource)) { return 0; }
 			
 			return Math.min(capacity - fluid.getAmount(), amountIn);
 		}//if simulate
@@ -54,7 +59,7 @@ public class WaterTank extends FluidTank implements IFluidHandler, IFluidTank{
 		if(fluid.isEmpty()) {
 			
 			fluid = new FluidStack(resource, Math.min(capacity, amountIn));
-			this.onContentsChanged();
+			this.onContentsFilled();
 			return fluid.getAmount();
 		}
 		
@@ -73,14 +78,10 @@ public class WaterTank extends FluidTank implements IFluidHandler, IFluidTank{
 			fluid.setAmount(capacity);
 		}
 		
-		if (filled > 0) { this.onContentsChanged(); }
+		if (filled > 0) { this.onContentsFilled(); }
 		
 		return filled;
-	}//fill
-	
-	@Override
-	protected void onContentsChanged() {
 		
-	}
+	}//fill
 
 }

@@ -19,8 +19,7 @@ public abstract class FluidTankBlockBase extends Block{
 	
 	public FluidTankBlockBase(Properties properties) {
 		super(properties);
-		
-		
+			
 	}
 	
 	@Override
@@ -44,4 +43,5 @@ public abstract class FluidTankBlockBase extends Block{
 	
 	@Override
 	protected abstract void fillStateContainer(Builder<Block, BlockState> builder);
+	
 }

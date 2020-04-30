@@ -2,6 +2,7 @@ package com.mrmcscruffybeard.scruffysmachines.util.helpers;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
@@ -86,5 +87,24 @@ public class BucketSwapHelper {
 
 		swapBuckets(getLavaBucket(), player);
 	}
+
+	public static boolean isCorrectBucket(Item test, Item correctBucket) {
+
+		return test == correctBucket;
+	}
+
+	public static boolean isEmptyBucket(Item test) {
+
+		return isCorrectBucket(test, Items.BUCKET);
+	}
+
+	public static boolean isWaterBucket(Item test) {
+
+		return isCorrectBucket(test, Items.WATER_BUCKET);
+	}
 	
+	public static boolean isLavaBucket(Item test) {
+		
+		return isCorrectBucket(test, Items.LAVA_BUCKET);
+	}
 }

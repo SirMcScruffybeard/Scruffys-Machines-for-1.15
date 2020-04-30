@@ -29,7 +29,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 @Mod.EventBusSubscriber(modid = ScruffysMachines.MOD_ID, bus = Bus.MOD)
 public class ScruffysMachines
 {
-    private static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger();
 
     public static final String MOD_ID = "scruffysmachines";
     
