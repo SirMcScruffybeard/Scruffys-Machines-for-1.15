@@ -1,14 +1,11 @@
 package com.mrmcscruffybeard.scruffysmachines.objects.tanks;
 
 import com.mrmcscruffybeard.scruffysmachines.objects.tileentities.bases.FluidTankTileEntityBase;
+import com.mrmcscruffybeard.scruffysmachines.util.helpers.FluidHelper;
 
-import net.minecraft.fluid.Fluids;
-import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 public class WaterTank extends ModFluidTank implements IFluidHandler, IFluidTank{
 	
@@ -25,12 +22,7 @@ public class WaterTank extends ModFluidTank implements IFluidHandler, IFluidTank
 	
 	public boolean isWaterValid(FluidStack stack) {
 		
-		return super.isFluidValid(stack) && isWater(stack);
-	}
-	
-	public static boolean isWater(FluidStack stack) {
-		
-		return stack.isFluidEqual(new FluidStack(Fluids.WATER, 1));
+		return super.isFluidValid(stack) && FluidHelper.isWater(stack);
 	}
 	
 	@Override
@@ -51,7 +43,7 @@ public class WaterTank extends ModFluidTank implements IFluidHandler, IFluidTank
 			
 			if (fluid.isEmpty()) { return Math.min(capacity, amountIn); }
 			
-			if (!isWater(resource)) { return 0; }
+			if (!FluidHelper.isWater(resource)) { return 0; }
 			
 			return Math.min(capacity - fluid.getAmount(), amountIn);
 		}//if simulate
@@ -83,5 +75,11 @@ public class WaterTank extends ModFluidTank implements IFluidHandler, IFluidTank
 		return filled;
 		
 	}//fill
+	
+	@Override
+	public boolean canHoldFluidType(FluidStack fluidStack) {
+		
+		return FluidHelper.isWater(fluidStack);
+	}
 
 }

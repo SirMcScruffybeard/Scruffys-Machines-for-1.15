@@ -1,10 +1,8 @@
 package com.mrmcscruffybeard.scruffysmachines.objects.tileentities.bases;
 
-import com.mrmcscruffybeard.scruffysmachines.objects.blocks.bases.FluidTankBlockBase;
 import com.mrmcscruffybeard.scruffysmachines.objects.tanks.WaterTank;
 import com.mrmcscruffybeard.scruffysmachines.util.helpers.BucketSwapHelper;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;

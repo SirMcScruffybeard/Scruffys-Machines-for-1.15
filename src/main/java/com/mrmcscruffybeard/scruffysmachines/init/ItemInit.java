@@ -25,5 +25,6 @@ public class ItemInit {
 	public static final RegistryObject<Item> IRON_RIVIT = ITEMS.register(IronRivitItem.ID, () -> new IronRivitItem(new Item.Properties().group(ScruffysMachinesItemGroup.instance)));
 	
 	
-	public static final RegistryObject<Item> WOOD_DIPSTICK = ITEMS.register(WoodDipstickItem.ID, () -> new WoodDipstickItem(new Item.Properties().group(ScruffysMachinesItemGroup.instance)));
+	public static final RegistryObject<Item> WOOD_DIPSTICK = ITEMS.register(WoodDipstickItem.ID, () -> 
+						new WoodDipstickItem(new Item.Properties().group(ScruffysMachinesItemGroup.instance).maxStackSize(WoodDipstickItem.MAX_STACK)));
 }//ItemInit

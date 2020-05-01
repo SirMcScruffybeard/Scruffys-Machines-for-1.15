@@ -4,8 +4,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.mrmcscruffybeard.scruffysmachines.objects.tanks.ModFluidTank;
-import com.mrmcscruffybeard.scruffysmachines.objects.tanks.WaterTank;
-
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
@@ -17,7 +15,6 @@ import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 public abstract class FluidTankTileEntityBase extends TileEntity{
 

@@ -6,6 +6,8 @@ public class WoodDipstickItem extends DipstickItemBase{
 
 	public static final String ID = "wood" + DIPSTICK;
 	
+	public static final int MAX_STACK = 1;
+	
 	public WoodDipstickItem(Properties properties) {
 		super(properties);
 		
