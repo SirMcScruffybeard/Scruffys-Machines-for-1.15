@@ -4,17 +4,24 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.mrmcscruffybeard.scruffysmachines.objects.tanks.ModFluidTank;
+import com.mrmcscruffybeard.scruffysmachines.util.helpers.FluidHelper;
+import com.mrmcscruffybeard.scruffysmachines.util.helpers.TankHelper;
+
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 
 public abstract class FluidTankTileEntityBase extends TileEntity{
 
@@ -79,14 +86,23 @@ public abstract class FluidTankTileEntityBase extends TileEntity{
 		return tankIn.getFluidAmount() >= BUCKET_VOLUME;
 	}
 
-	public abstract void fillWithBucket(PlayerEntity player);
+	public abstract void fillWithBucket();
 
-	public abstract void drainWithBucket(PlayerEntity player);
+	public void drainWithBucket() {
+		
+		if(isHoldingBucketVolume(tank)) {
 
-	public boolean canSpill() {
+			tank.drain(BUCKET_VOLUME, FluidAction.EXECUTE);
 
-		return true;
+		}
+		
 	}
+
+	public boolean canSpill() { return tank.hasBucketWorth(); }
+	
+	public boolean canDrain() { return tank.hasBucketWorth(); }
+	
+	public boolean canFill() { return tank.canHoldBucketWorth(); }
 
 	public boolean hasFluidTank() {
 
@@ -126,6 +142,17 @@ public abstract class FluidTankTileEntityBase extends TileEntity{
 	public ModFluidTank getTank() {
 
 		return tank;
+	}
+
+	
+	public void spill(BlockPos pos, World worldIn)  {
+		
+		if (FluidHelper.isBucketWorth(tank.getFluidAmount())) {
+			
+			FluidHelper.flood(pos, tank.getFluid(), worldIn);
+			
+			tank.empty();
+		}
 	}
 
 }

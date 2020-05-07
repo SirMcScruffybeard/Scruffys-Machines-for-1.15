@@ -1,12 +1,15 @@
 package com.mrmcscruffybeard.scruffysmachines.objects.blocks.bases;
 
 import com.mrmcscruffybeard.scruffysmachines.objects.tileentities.bases.WaterTankTileEntityBase;
+import com.mrmcscruffybeard.scruffysmachines.util.helpers.BucketHelper;
 import com.mrmcscruffybeard.scruffysmachines.util.helpers.BucketSwapHelper;
+import com.mrmcscruffybeard.scruffysmachines.util.helpers.TankHelper;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.state.DirectionProperty;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -15,38 +18,37 @@ import net.minecraft.world.World;
 
 public abstract class WaterTankBlockBase extends FluidTankBlockBase{
 
+	public static final String ID_WATER_TANK = "_water" + ID_TANK;
+	
+	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+	
 	public WaterTankBlockBase(Properties properties) {
 		super(properties);
 
 	}
-
+	
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
+	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player,
 			Hand handIn, BlockRayTraceResult hit) {
-
-		if (!worldIn.isRemote) { 
-
-			TileEntity tile = worldIn.getTileEntity(pos);
-
-			Item heldItem = player.getHeldItemMainhand().getItem();
-
-			if (tile instanceof WaterTankTileEntityBase) {
-
-				if(BucketSwapHelper.isWaterBucket(heldItem)) { 
-
-					((WaterTankTileEntityBase) tile).fillWithBucket(player);
-
+		
+		if(!world.isRemote && TankHelper.isWaterTankAtPos(pos, world)) {
+				
+				WaterTankTileEntityBase tank = (WaterTankTileEntityBase) world.getTileEntity(pos);
+				
+				Item heldItem = player.getHeldItemMainhand().getItem();
+				
+				if (BucketHelper.isWaterBucket(heldItem)) {
+					
+					
 				}
-
-				if(BucketSwapHelper.isEmptyBucket(heldItem)) {
-
-					((WaterTankTileEntityBase) tile).drainWithBucket(player);
-
+				
+				if(BucketHelper.isEmptyBucket(heldItem)) {
+					
+					
 				}
 			}
-		}
-
+			
 		return ActionResultType.SUCCESS;
+	}
 
-	}//OnBlockActivated
 }

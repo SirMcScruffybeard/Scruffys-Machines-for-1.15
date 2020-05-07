@@ -1,8 +1,10 @@
 package com.mrmcscruffybeard.scruffysmachines.util.helpers;
 
 import com.mrmcscruffybeard.scruffysmachines.objects.blocks.bases.FluidTankBlockBase;
+import com.mrmcscruffybeard.scruffysmachines.objects.blocks.bases.WaterTankBlockBase;
 import com.mrmcscruffybeard.scruffysmachines.objects.tanks.ModFluidTank;
 import com.mrmcscruffybeard.scruffysmachines.objects.tileentities.bases.FluidTankTileEntityBase;
+import com.mrmcscruffybeard.scruffysmachines.objects.tileentities.bases.WaterTankTileEntityBase;
 
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
@@ -37,6 +39,7 @@ public class TankHelper {
 		return tileEntity instanceof FluidTankTileEntityBase;
 	}
 
+
 	/******************************************************************
 	 * isFluidTankAtPos(BlockPos pos, World world)
 	 * 
@@ -48,9 +51,22 @@ public class TankHelper {
 	 ******************************************************************/
 	public static boolean isFluidTankAtPos(BlockPos pos, World world) {
 
-		Block block = world.getBlockState(pos).getBlock();
+		return isFluidTankBlock(world.getBlockState(pos).getBlock()) && isFluidTankTileEntity(world.getTileEntity(pos));
+	}
 
-		return isFluidTankBlock(block) && isFluidTankTileEntity(world.getTileEntity(pos));
+	public static boolean isWaterTankBlock(Block block) {
+
+		return block instanceof WaterTankBlockBase;
+	}
+
+	public static boolean isWaterTankTileEntity(TileEntity tileEntity) {
+
+		return tileEntity instanceof WaterTankTileEntityBase;
+	}
+	
+	public static boolean isWaterTankAtPos(BlockPos pos, World world) {
+		
+		return isWaterTankBlock(world.getBlockState(pos).getBlock()) && isWaterTankTileEntity(world.getTileEntity(pos));
 	}
 
 	/*******************************************************************************
@@ -66,10 +82,10 @@ public class TankHelper {
 	 * the space left in the inTank and how much fluid outTank is holding
 	 *******************************************************************************/
 	public static int getTransferAmount(ModFluidTank inTank, ModFluidTank outTank) {
-		
+
 		return inTank.getSpace() < outTank.getFluidAmount() ? inTank.getSpace() : outTank.getFluidAmount();
 	}
-	
+
 	/***************************************************************************************
 	 * getTransferedFluid(ModFluidTank inTank, ModFluidTank outTank)
 	 * 
@@ -85,9 +101,9 @@ public class TankHelper {
 	public static FluidStack getTransferedFluid(ModFluidTank inTank, ModFluidTank outTank) {
 
 		return getTransferedFluid(outTank, getTransferAmount(inTank, outTank));
-	
+
 	}
-	
+
 	/******************************************************************************
 	 * getTransferedFluid(ModFluidTank outTank, int amount)
 	 * 
@@ -100,7 +116,7 @@ public class TankHelper {
 	 * Returns the FluidStack to be transfered  
 	 ******************************************************************************/
 	public static FluidStack getTransferedFluid(ModFluidTank outTank, int amount) {
-		
+
 		return outTank.drain(amount, FluidAction.EXECUTE);
 	}
 

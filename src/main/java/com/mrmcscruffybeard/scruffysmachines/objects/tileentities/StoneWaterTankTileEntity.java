@@ -33,6 +33,4 @@ public class StoneWaterTankTileEntity extends WaterTankTileEntityBase {
 
 	}
 
-	
-
 }

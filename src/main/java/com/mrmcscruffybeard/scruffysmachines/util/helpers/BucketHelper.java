@@ -6,7 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
-public class BucketSwapHelper {
+public class BucketHelper {
 
 	/************************************************************************
 	 * swapBuckets()
@@ -93,18 +93,18 @@ public class BucketSwapHelper {
 		return test == correctBucket;
 	}
 
-	public static boolean isEmptyBucket(Item test) {
+	public static boolean isEmptyBucket(Item bucket) {
 
-		return isCorrectBucket(test, Items.BUCKET);
+		return isCorrectBucket(bucket, Items.BUCKET);
 	}
 
-	public static boolean isWaterBucket(Item test) {
+	public static boolean isWaterBucket(Item bucket) {
 
-		return isCorrectBucket(test, Items.WATER_BUCKET);
+		return isCorrectBucket(bucket, Items.WATER_BUCKET);
 	}
 	
-	public static boolean isLavaBucket(Item test) {
+	public static boolean isLavaBucket(Item bucket) {
 		
-		return isCorrectBucket(test, Items.LAVA_BUCKET);
+		return isCorrectBucket(bucket, Items.LAVA_BUCKET);
 	}
 }

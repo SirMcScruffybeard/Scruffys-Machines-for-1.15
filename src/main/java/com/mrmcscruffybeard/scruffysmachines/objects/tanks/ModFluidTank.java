@@ -28,6 +28,16 @@ public class ModFluidTank extends FluidTank implements IFluidHandler, IModFluidT
 
 		this.tile = tileIn;
 	}
+	
+	public boolean hasBucketWorth() {
+		
+		return this.getFluidAmount() >= BUCKET_VOLUME;
+	}
+	
+	public boolean canHoldBucketWorth() {
+		
+		return this.getSpace() >= BUCKET_VOLUME;
+	}
 
 	
 	@Override
