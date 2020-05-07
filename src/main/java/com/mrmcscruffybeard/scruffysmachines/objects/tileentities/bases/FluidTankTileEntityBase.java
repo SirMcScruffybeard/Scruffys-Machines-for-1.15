@@ -100,14 +100,15 @@ public abstract class FluidTankTileEntityBase extends TileEntity{
 
 	public boolean canSpill() { return tank.hasBucketWorth(); }
 	
-	public boolean canDrain() { return tank.hasBucketWorth(); }
+	public boolean canDrainWithBucket() { return tank.hasBucketWorth(); }
 	
-	public boolean canFill() { return tank.canHoldBucketWorth(); }
+	public boolean canDrain() { return tank.getFluidAmount() > 0; }
+	
+	public boolean canFillWithBucket() { return tank.canHoldBucketWorth(); }
+	
+	public boolean canFill() { return tank.getSpace() > 0; }
 
-	public boolean hasFluidTank() {
-
-		return true;
-	}
+	public boolean hasFluidTank() { return true; }
 
 	public int getFluidAmount() {
 

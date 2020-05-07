@@ -38,7 +38,17 @@ public class TankHelper {
 
 		return tileEntity instanceof FluidTankTileEntityBase;
 	}
+	
+	
+	public static boolean isFluidTankBlock(BlockPos pos, World world) {
 
+		return isFluidTankBlock(world.getBlockState(pos).getBlock());
+	}
+	
+	public static boolean isFluidTankTileEntity(BlockPos pos, World world) {
+
+		return isFluidTankTileEntity(world.getTileEntity(pos));
+	}
 
 	/******************************************************************
 	 * isFluidTankAtPos(BlockPos pos, World world)
@@ -51,7 +61,7 @@ public class TankHelper {
 	 ******************************************************************/
 	public static boolean isFluidTankAtPos(BlockPos pos, World world) {
 
-		return isFluidTankBlock(world.getBlockState(pos).getBlock()) && isFluidTankTileEntity(world.getTileEntity(pos));
+		return isFluidTankBlock(pos, world) && isFluidTankTileEntity(pos, world);
 	}
 
 	public static boolean isWaterTankBlock(Block block) {
@@ -64,9 +74,19 @@ public class TankHelper {
 		return tileEntity instanceof WaterTankTileEntityBase;
 	}
 	
+	public static boolean isWaterTankBlock(BlockPos pos, World world) {
+
+		return isWaterTankBlock(world.getBlockState(pos).getBlock());
+	}
+
+	public static boolean isWaterTankTileEntity(BlockPos pos, World world) {
+
+		return isWaterTankTileEntity(world.getTileEntity(pos));
+	}
+	
 	public static boolean isWaterTankAtPos(BlockPos pos, World world) {
 		
-		return isWaterTankBlock(world.getBlockState(pos).getBlock()) && isWaterTankTileEntity(world.getTileEntity(pos));
+		return isWaterTankBlock(pos, world) && isWaterTankTileEntity(pos, world);
 	}
 
 	/*******************************************************************************

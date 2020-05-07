@@ -22,14 +22,14 @@ public class StoneWaterTankTileEntity extends WaterTankTileEntityBase {
 
 	private StoneWaterTankTileEntity(TileEntityType<?> tileEntityTypeIn, WaterTank tankIn) {
 		super(tileEntityTypeIn, tankIn);
+		
+		this.setInTankTileEntity(this);
 
 	}
 
 	public StoneWaterTankTileEntity() {
 		
 		this(ModTileEntityTypes.STONE_WATER_TANK.get(), new WaterTank(BUCKETS * BUCKET_VOLUME));
-		
-		this.setInTankTileEntity(this);
 
 	}
 

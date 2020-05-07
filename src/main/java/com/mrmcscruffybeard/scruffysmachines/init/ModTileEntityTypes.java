@@ -4,6 +4,7 @@ import com.mrmcscruffybeard.scruffysmachines.ScruffysMachines;
 import com.mrmcscruffybeard.scruffysmachines.objects.tileentities.BrickFurnaceTileEntity;
 import com.mrmcscruffybeard.scruffysmachines.objects.tileentities.LeatherChestTileEntity;
 import com.mrmcscruffybeard.scruffysmachines.objects.tileentities.StoneWaterTankTileEntity;
+import com.mrmcscruffybeard.scruffysmachines.objects.tileentities.WoodWaterTankTileEntity;
 
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
@@ -25,9 +26,12 @@ public class ModTileEntityTypes {
 	public static final RegistryObject<TileEntityType<LeatherChestTileEntity>> LEATHER_CHEST = TILE_ENTITY_TYPES
 			.register(LeatherChestTileEntity.ID, () -> TileEntityType.Builder.create(LeatherChestTileEntity::new,  BlockInit.LEATHER_CHEST.get()).build(null));
 
+	
+	
 	public static final RegistryObject<TileEntityType<StoneWaterTankTileEntity>> STONE_WATER_TANK = TILE_ENTITY_TYPES
 			.register(StoneWaterTankTileEntity.ID, () -> TileEntityType.Builder.create(StoneWaterTankTileEntity::new,  BlockInit.STONE_WATER_TANK.get()).build(null));
 
-	
+	public static final RegistryObject<TileEntityType<WoodWaterTankTileEntity>> WOOD_WATER_TANK = TILE_ENTITY_TYPES
+			.register(WoodWaterTankTileEntity.ID, () -> TileEntityType.Builder.create(WoodWaterTankTileEntity::new, BlockInit.WOOD_WATER_TANK.get()).build(null));
 	
 }//ModTileEntityTypes
