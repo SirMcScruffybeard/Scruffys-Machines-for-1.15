@@ -1,16 +1,11 @@
 package com.mrmcscruffybeard.scruffysmachines.util.helpers;
 
-import com.mrmcscruffybeard.scruffysmachines.util.PosSpokes;
-import com.mrmcscruffybeard.scruffysmachines.util.PosSpokes.CenterSpokes;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Direction8;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidAttributes;
@@ -36,7 +31,7 @@ public class FluidHelper {
 
 	public static boolean isFluidType(final FluidStack fluidStack, final Fluid fluid) {
 
-		return fluidStack.isFluidEqual(new FluidStack(fluid, 1));
+		return fluidStack.getFluid().getFluid() == fluid;
 	}
 
 	public static boolean isWater(FluidStack fluidStack) {
@@ -91,59 +86,24 @@ public class FluidHelper {
 
 		FluidStack fluid = fluidIn;
 
+		placeFluidInWorld(fluid, pos, world);
 
-		BlockPos[] puddles = new  BlockPos[CenterSpokes.values().length];
-
-		fluid = placeFluidInWorld(fluid, pos, world);
-
-		int n = 0;
-
-		//sets starting positions 
-		for(CenterSpokes spoke : CenterSpokes.values()) {
-
-			puddles[n] = new BlockPos(spoke.getX(), spoke.getY(), spoke.getZ());
-
-			n++;
-		}
-		
-		boolean[] flags = new boolean[puddles.length];
-		
-		for(boolean flag : flags) {flag = true;} //Set all flags to true
-		
-		int flagCount = 0; //Holds number of !flags
-		
-		int i = 0;
-		
-		while(i < buckets ) {
-
-			n = 0;
-			
-			for(CenterSpokes spoke : CenterSpokes.values()) {
-
-				if(flags[n]) {
-
-					fluid = placeFluidInWorld(fluidIn, puddles[n], world);
-
-					puddles[n] = adjustPos(puddles[i], spoke.getX(), spoke.getY(), spoke.getZ());
-					
-					flags[n] = isValidBlockAtPos(puddles[n], world, fluidIn); //Set flag for next block in same direction
-					
-					n++;
-					
-					if( !flags[n]) { flagCount ++; } //if next block is not valid add 1 to flagCount
-				}
-				
-			}
-
-			if(flagCount == puddles.length) { i = buckets; }
-			else { i++;}
-		}
+		fluid.shrink(FluidAttributes.BUCKET_VOLUME);
 
 	}
 
 	private static boolean isValidBlockAtPos(BlockPos pos, World world, FluidStack fluidIn) {
 
 		return PosHelper.isAirAtPos(pos, world) || PosHelper.isValidBlockAtPos(pos, world, getBlockFromFluidStack(fluidIn));
+	}
+	
+	private static BlockPos addPos(BlockPos pos1, BlockPos pos2) {
+		
+		int x = pos1.getX() + pos2.getX();
+		int y = pos1.getY() + pos2.getY();
+		int z = pos1.getZ() + pos2.getZ();
+		
+		return new BlockPos(x, y, z);
 	}
 
 	private static BlockPos adjustPos(BlockPos pos, final int X, final int Y, final int Z) {
@@ -152,23 +112,20 @@ public class FluidHelper {
 		int outY = Y + pos.getY();
 		int outZ = Z + pos.getY();
 
-		return new BlockPos(outX, pos.getY() + Y, pos.getZ() + Z);
+		return new BlockPos(outX, outY, outZ);
 
 	}
 
-	private static FluidStack placeFluidInWorld(FluidStack fluid, BlockPos pos, final World world) {
+	private static void placeFluidInWorld(FluidStack fluid, BlockPos pos, final World world) {
 
-		if(hasBucketWorth(fluid)) {
+		if(!world.isRemote) {
 
-			if(!fluid.isEmpty()) {
+			if(hasBucketWorth(fluid)) {
 
 				world.setBlockState(pos, getBlockStateFromFluidStack(fluid));
 
-				fluid.shrink(FluidAttributes.BUCKET_VOLUME);	
 			}
 		}
-
-		return fluid;
 	}
 
 }

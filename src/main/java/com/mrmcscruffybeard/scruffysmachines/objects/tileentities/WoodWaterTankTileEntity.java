@@ -15,7 +15,7 @@ public class WoodWaterTankTileEntity extends WaterTankTileEntityBase implements 
 	public static final String ID = WoodWaterTankBlock.ID;
 	
 	public static final int BUCKETS = 5;
-	public static final int LEAK_AMOUNT = 10; //in mB
+	public static final int LEAK_AMOUNT = 5; //in mB
 	
 	//20 ticks per second
 	private final int NUM_COOLDOWN_TICKS = 200;

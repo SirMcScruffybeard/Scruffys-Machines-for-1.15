@@ -6,8 +6,6 @@ import com.mrmcscruffybeard.scruffysmachines.objects.blocks.CrumblerBlock;
 import com.mrmcscruffybeard.scruffysmachines.objects.blocks.LeatherChestBlock;
 import com.mrmcscruffybeard.scruffysmachines.objects.blocks.StoneWaterTankBlock;
 import com.mrmcscruffybeard.scruffysmachines.objects.blocks.WoodWaterTankBlock;
-import com.mrmcscruffybeard.scruffysmachines.objects.tileentities.WoodWaterTankTileEntity;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.Block.Properties;
 import net.minecraft.block.Blocks;
