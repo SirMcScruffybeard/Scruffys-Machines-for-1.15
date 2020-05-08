@@ -14,12 +14,18 @@
 	"item.scruffysmachines.trimmed_leather_item": "Trimmed Leather",
 	"item.scruffysmachines.leather_scrap_item": "Leather Scrap",
 	
+	"item.scruffysmachines.wood_dipstick_item": "Wood Dipstick",
+	
+	
 	"block.scruffysmachines.oven_bricks_block": "Oven Bricks",
 	"block.scruffysmachines.leather_block": "Leather Block",
 	
 	
 	
-	"block.scruffysmachines.brick_fluid_tank": "Brick Fluid Tank",
+	"block.scruffysmachines.stone_water_tank": "Stone Water Tank",
+	"block.scruffysmachines.wood_water_tank": "Wood Water Tank",
+	
+	
 	
 	"block.scruffysmachines.leather_chest": "Leather Chest",
 	"container.leather_chest": "Leather Chest",
@@ -30,4 +36,6 @@
 	"container.brick_furnace": "Brick Furnace",
 	
 	"itemGroup.scruffysmachinestab": "Scruffy's Machines"
+	
 }
+

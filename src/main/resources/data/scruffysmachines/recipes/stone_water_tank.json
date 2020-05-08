@@ -1,0 +1,29 @@
+{
+    "type": "minecraft:crafting_shaped",
+   
+    "pattern":
+    [
+        "SSS",
+        "S S",
+        "SSS"
+    ],
+   
+    "key":
+    {
+        "S":
+        {
+            "item": "minecraft:stone_slab"
+        },
+
+        "G":
+        {
+            "item": "minecraft:glass"
+        }
+    },
+   
+    "result":
+    {
+        "item": "scruffysmachines:stone_water_tank",
+        "count": 1
+    }
+}

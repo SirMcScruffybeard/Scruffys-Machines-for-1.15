@@ -4,8 +4,11 @@ import com.mrmcscruffybeard.scruffysmachines.ScruffysMachines;
 import com.mrmcscruffybeard.scruffysmachines.objects.blocks.BrickFurnaceBlock;
 import com.mrmcscruffybeard.scruffysmachines.objects.blocks.CrumblerBlock;
 import com.mrmcscruffybeard.scruffysmachines.objects.blocks.LeatherChestBlock;
-
+import com.mrmcscruffybeard.scruffysmachines.objects.blocks.StoneWaterTankBlock;
+import com.mrmcscruffybeard.scruffysmachines.objects.blocks.WoodWaterTankBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.Block.Properties;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.ToolType;
@@ -29,13 +32,21 @@ public class BlockInit {
 	
 	
 	
-	public static final RegistryObject<Block> LEATHER_CHEST = BLOCKS.register(LeatherChestBlock.ID, () -> new LeatherChestBlock(Block.Properties.create(LeatherChestBlock.MATERIAL).
+	public static final RegistryObject<Block> LEATHER_CHEST = BLOCKS.register(LeatherChestBlock.ID, () -> 
+			new LeatherChestBlock(Block.Properties.create(LeatherChestBlock.MATERIAL).
 			hardnessAndResistance(LeatherChestBlock.HARDNESS, LeatherChestBlock.RESISTANCE).sound(LeatherChestBlock.SOUND)));
 	
 	
 	public static final RegistryObject<Block> CRUMBLER = BLOCKS.register(CrumblerBlock.ID, () -> 
 			new CrumblerBlock(Block.Properties.create(Material.ROCK)));
 	
+	
+	public static final RegistryObject<Block> STONE_WATER_TANK = BLOCKS.register(StoneWaterTankBlock.ID, () -> 
+			new StoneWaterTankBlock(Properties.from(Blocks.STONE)));
+
+	public static final RegistryObject<Block> WOOD_WATER_TANK = BLOCKS.register(WoodWaterTankBlock.ID, () ->
+			new WoodWaterTankBlock(Properties.from(Blocks.OAK_WOOD)));
+
 }//BlockInit
 
 

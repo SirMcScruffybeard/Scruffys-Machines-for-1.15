@@ -45,6 +45,7 @@ public class LeatherChestBlock extends Block{
 		super(properties);
 		
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
+
 	}
 
 	@Override
@@ -60,10 +61,11 @@ public class LeatherChestBlock extends Block{
 	public BlockState mirror(BlockState state, Mirror mirrorIn) { return state.rotate(mirrorIn.toRotation(state.get(FACING))); }
 	
 	@Override
-	protected void fillStateContainer(Builder<Block, BlockState> builder) { builder.add(FACING); }
+	protected void fillStateContainer(Builder<Block, BlockState> builder) { builder.add(FACING);}
 	
 	@Override
 	public boolean hasTileEntity(BlockState state) {
+		
 		return true;
 	}
 	
@@ -71,6 +73,7 @@ public class LeatherChestBlock extends Block{
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
 		
 		return ModTileEntityTypes.LEATHER_CHEST.get().create();
+		
 	}
 	
 	@Override
