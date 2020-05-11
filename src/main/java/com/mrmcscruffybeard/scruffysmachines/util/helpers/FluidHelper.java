@@ -8,6 +8,8 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.dimension.Dimension;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -49,39 +51,26 @@ public class FluidHelper {
 	 * 
 	 * @param FluidStack fluidIn
 	 * 
-	 * @return FluidStack BlockState 
+	 * @return  BlockState 
 	 * 
 	 * Returns BlockState equivalent of "fluidIn".
 	 **************************************************************************************************/
 	public static BlockState getBlockStateFromFluidStack(FluidStack fluidIn) {
 
-		return getBlockFromFluidStack(fluidIn).getDefaultState();
+		return fluidIn.getFluid().getDefaultState().getBlockState();
 	}
 
 	public static Block getBlockFromFluidStack(FluidStack fluidIn) {
 
-		Block outBlock  =  Blocks.AIR;
-
-		for(Block block : ForgeRegistries.BLOCKS) {
-
-			if(block instanceof FlowingFluidBlock) { 
-
-				//ScruffysMachines.LOGGER.info(block.getNameTextComponent().getFormattedText());
-
-				Fluid fluid = (Fluid) ((FlowingFluidBlock)block).getFluidState(block.getDefaultState()).getFluid();
-
-				if(fluidIn.isFluidEqual(new FluidStack(fluid, 1))) {
-
-					outBlock = block;
-				}
-			}
-		}
-
-		return outBlock;
+		return getBlockStateFromFluidStack(fluidIn).getBlock();
+		
+		
 	}
 
 	public static void flood(final BlockPos pos, final FluidStack fluidIn, final World world) {
 
+		if(world.getDimension().getType() != DimensionType.THE_NETHER || !isWater(fluidIn)) {
+		
 		int buckets = fluidIn.getAmount() / FluidAttributes.BUCKET_VOLUME;
 
 		FluidStack fluid = fluidIn;
@@ -89,34 +78,12 @@ public class FluidHelper {
 		placeFluidInWorld(fluid, pos, world);
 
 		fluid.shrink(FluidAttributes.BUCKET_VOLUME);
-
-	}
-
-	private static boolean isValidBlockAtPos(BlockPos pos, World world, FluidStack fluidIn) {
-
-		return PosHelper.isAirAtPos(pos, world) || PosHelper.isValidBlockAtPos(pos, world, getBlockFromFluidStack(fluidIn));
-	}
-	
-	private static BlockPos addPos(BlockPos pos1, BlockPos pos2) {
 		
-		int x = pos1.getX() + pos2.getX();
-		int y = pos1.getY() + pos2.getY();
-		int z = pos1.getZ() + pos2.getZ();
 		
-		return new BlockPos(x, y, z);
+		}
 	}
 
-	private static BlockPos adjustPos(BlockPos pos, final int X, final int Y, final int Z) {
-
-		int outX = X + pos.getX();
-		int outY = Y + pos.getY();
-		int outZ = Z + pos.getY();
-
-		return new BlockPos(outX, outY, outZ);
-
-	}
-
-	private static void placeFluidInWorld(FluidStack fluid, BlockPos pos, final World world) {
+	public static void placeFluidInWorld(FluidStack fluid, BlockPos pos, final World world) {
 
 		if(!world.isRemote) {
 

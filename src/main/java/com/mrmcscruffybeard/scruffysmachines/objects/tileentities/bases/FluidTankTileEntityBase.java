@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 
 import com.mrmcscruffybeard.scruffysmachines.objects.tanks.ModFluidTank;
 import com.mrmcscruffybeard.scruffysmachines.util.helpers.FluidHelper;
+import com.mrmcscruffybeard.scruffysmachines.util.helpers.PosHelper;
 import com.mrmcscruffybeard.scruffysmachines.util.helpers.TankHelper;
 
 import net.minecraft.block.BlockState;
@@ -155,5 +156,5 @@ public abstract class FluidTankTileEntityBase extends TileEntity{
 			tank.empty();
 		}
 	}
-
+	
 }

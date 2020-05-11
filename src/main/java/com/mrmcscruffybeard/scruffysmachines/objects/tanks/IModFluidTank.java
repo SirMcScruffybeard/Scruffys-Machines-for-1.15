@@ -14,4 +14,6 @@ public interface IModFluidTank extends IFluidTank{
 	void setTankTileEntity(FluidTankTileEntityBase tileIn);
 	
 	boolean canHoldFluidType(FluidStack fluidStack);
+	
+	default boolean canHoldGas() { return false; };
 }

@@ -120,24 +120,8 @@ public class TankHelper {
 	 ***************************************************************************************/
 	public static FluidStack getTransferedFluid(ModFluidTank inTank, ModFluidTank outTank) {
 
-		return getTransferedFluid(outTank, getTransferAmount(inTank, outTank));
+		return outTank.drain(getTransferAmount(inTank, outTank), FluidAction.EXECUTE);
 
-	}
-
-	/******************************************************************************
-	 * getTransferedFluid(ModFluidTank outTank, int amount)
-	 * 
-	 * @param ModFluidTank outTank
-	 * 
-	 * @param int amount
-	 * 
-	 * @return the FluidStack to be transfered
-	 * 
-	 * Returns the FluidStack to be transfered  
-	 ******************************************************************************/
-	public static FluidStack getTransferedFluid(ModFluidTank outTank, int amount) {
-
-		return outTank.drain(amount, FluidAction.EXECUTE);
 	}
 
 	/*************************************************************************
@@ -149,7 +133,7 @@ public class TankHelper {
 	 *************************************************************************/
 	public static void fillFromUpper(final FluidTankTileEntityBase tankTile) {
 
-		moveFluid(tankTile.getPos(), PosHelper.getAbovePos(tankTile), tankTile.getWorld());
+		moveFluid(tankTile.getPos(), PosHelper.getAboveTileEntity(tankTile), tankTile.getWorld());
 	}
 
 	/************************************************************************
@@ -161,12 +145,12 @@ public class TankHelper {
 	 ************************************************************************/
 	public static void drainToLower(final FluidTankTileEntityBase tankTile) {
 
-		moveFluid(PosHelper.getBelowPos(tankTile), tankTile.getPos(), tankTile.getWorld());
+		moveFluid(PosHelper.getBelowTileEntity(tankTile), tankTile.getPos(), tankTile.getWorld());
 	}
 
 
 	/***************************************************************************
-	 * drainToLower(final FluidTankTileEntityBase tankTile)
+	 * moveFluid(final FluidTankTileEntityBase tankTile)
 	 * 
 	 * @param BlockPos inPos
 	 * 

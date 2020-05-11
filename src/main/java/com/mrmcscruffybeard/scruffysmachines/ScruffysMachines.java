@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.mrmcscruffybeard.scruffysmachines.init.BlockInit;
+import com.mrmcscruffybeard.scruffysmachines.init.FluidInit;
 import com.mrmcscruffybeard.scruffysmachines.init.ItemInit;
 import com.mrmcscruffybeard.scruffysmachines.init.ModContainerTypes;
 import com.mrmcscruffybeard.scruffysmachines.init.ModTileEntityTypes;
@@ -48,6 +49,7 @@ public class ScruffysMachines
 
         ItemInit.ITEMS.register(modEventBus);
 		BlockInit.BLOCKS.register(modEventBus);
+		FluidInit.FLUIDS.register(modEventBus);
 		ModTileEntityTypes.TILE_ENTITY_TYPES.register(modEventBus);
 		ModContainerTypes.CONTAINER_TYPES.register(modEventBus);
         

@@ -13,7 +13,7 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 public class ModFluidTank extends FluidTank implements IFluidHandler, IModFluidTank{
 
-	public static int BUCKET_VOLUME = FluidAttributes.BUCKET_VOLUME;
+	public static final int BUCKET_VOLUME = FluidAttributes.BUCKET_VOLUME;
 
 	private FluidTankTileEntityBase tile;
 
@@ -46,6 +46,7 @@ public class ModFluidTank extends FluidTank implements IFluidHandler, IModFluidT
 	@Override
 	public boolean isFull() { return this.getSpace() == 0; }
 
+	@Override
 	public ModFluidTank setCapacity(int cap) {
 
 		this.capacity = cap;

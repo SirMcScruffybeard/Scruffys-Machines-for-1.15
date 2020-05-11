@@ -40,12 +40,13 @@ public class BlockInit {
 	public static final RegistryObject<Block> CRUMBLER = BLOCKS.register(CrumblerBlock.ID, () -> 
 			new CrumblerBlock(Block.Properties.create(Material.ROCK)));
 	
-	
+	//FluidTanks
 	public static final RegistryObject<Block> STONE_WATER_TANK = BLOCKS.register(StoneWaterTankBlock.ID, () -> 
 			new StoneWaterTankBlock(Properties.from(Blocks.STONE)));
 
 	public static final RegistryObject<Block> WOOD_WATER_TANK = BLOCKS.register(WoodWaterTankBlock.ID, () ->
 			new WoodWaterTankBlock(Properties.from(Blocks.OAK_WOOD)));
+	
 
 }//BlockInit
 
