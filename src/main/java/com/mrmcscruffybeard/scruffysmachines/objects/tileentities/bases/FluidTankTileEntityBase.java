@@ -5,11 +5,6 @@ import javax.annotation.Nullable;
 
 import com.mrmcscruffybeard.scruffysmachines.objects.tanks.ModFluidTank;
 import com.mrmcscruffybeard.scruffysmachines.util.helpers.FluidHelper;
-import com.mrmcscruffybeard.scruffysmachines.util.helpers.PosHelper;
-import com.mrmcscruffybeard.scruffysmachines.util.helpers.TankHelper;
-
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -24,7 +19,7 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 
-public abstract class FluidTankTileEntityBase extends TileEntity{
+public abstract class FluidTankTileEntityBase extends TileEntity {
 
 	public static final int BUCKET_VOLUME = FluidAttributes.BUCKET_VOLUME;
 
@@ -38,11 +33,6 @@ public abstract class FluidTankTileEntityBase extends TileEntity{
 
 		this.tank = tankIn;
 
-	}
-
-	public void setInTankTileEntity(FluidTankTileEntityBase tileIn) {
-
-		tank.setTankTileEntity(tileIn);
 	}
 
 	@Override
@@ -103,18 +93,15 @@ public abstract class FluidTankTileEntityBase extends TileEntity{
 	
 	public boolean canDrainWithBucket() { return tank.hasBucketWorth(); }
 	
-	public boolean canDrain() { return tank.getFluidAmount() > 0; }
+	public boolean canDrain() { return !tank.isEmpty(); }
 	
 	public boolean canFillWithBucket() { return tank.canHoldBucketWorth(); }
 	
-	public boolean canFill() { return tank.getSpace() > 0; }
+	public boolean canFill() { return tank.getSpace() > 0 || isEmpty(); }
 
 	public boolean hasFluidTank() { return true; }
 
-	public int getFluidAmount() {
-
-		return tank.getFluidAmount();
-	}
+	public int getFluidAmount() { return tank.getFluidAmount(); }
 
 	/*****************************
 	 * getFluid()
@@ -155,6 +142,11 @@ public abstract class FluidTankTileEntityBase extends TileEntity{
 			
 			tank.empty();
 		}
+	}
+	
+	public void fill(FluidStack resource) {
+		
+		tank.fill(resource, FluidAction.EXECUTE);
 	}
 	
 }

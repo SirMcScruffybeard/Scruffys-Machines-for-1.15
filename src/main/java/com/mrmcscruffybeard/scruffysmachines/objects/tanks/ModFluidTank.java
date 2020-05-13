@@ -2,9 +2,9 @@ package com.mrmcscruffybeard.scruffysmachines.objects.tanks;
 
 import javax.annotation.Nonnull;
 
-import com.mrmcscruffybeard.scruffysmachines.objects.tileentities.bases.FluidTankTileEntityBase;
 import com.mrmcscruffybeard.scruffysmachines.util.helpers.TankHelper;
 
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -15,7 +15,7 @@ public class ModFluidTank extends FluidTank implements IFluidHandler, IModFluidT
 
 	public static final int BUCKET_VOLUME = FluidAttributes.BUCKET_VOLUME;
 
-	private FluidTankTileEntityBase tile;
+	private TileEntity tile;
 
 
 	public ModFluidTank(int capacity)
@@ -24,7 +24,7 @@ public class ModFluidTank extends FluidTank implements IFluidHandler, IModFluidT
 		
 	}
 
-	public void setTankTileEntity(FluidTankTileEntityBase tileIn) {
+	public void setTankTileEntity(TileEntity tileIn) {
 
 		this.tile = tileIn;
 	}
@@ -139,5 +139,6 @@ public class ModFluidTank extends FluidTank implements IFluidHandler, IModFluidT
 
 	@Override
 	public boolean canHoldFluidType(FluidStack fluidStack) { return true; }
+
 
 }

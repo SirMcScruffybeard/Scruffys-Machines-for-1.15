@@ -5,6 +5,7 @@ import com.mrmcscruffybeard.scruffysmachines.objects.blocks.BrickFurnaceBlock;
 import com.mrmcscruffybeard.scruffysmachines.objects.blocks.CrumblerBlock;
 import com.mrmcscruffybeard.scruffysmachines.objects.blocks.LeatherChestBlock;
 import com.mrmcscruffybeard.scruffysmachines.objects.blocks.StoneWaterTankBlock;
+import com.mrmcscruffybeard.scruffysmachines.objects.blocks.WoodWaterPumpBlock;
 import com.mrmcscruffybeard.scruffysmachines.objects.blocks.WoodWaterTankBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Block.Properties;
@@ -48,6 +49,9 @@ public class BlockInit {
 			new WoodWaterTankBlock(Properties.from(Blocks.OAK_WOOD)));
 	
 
+	
+	public static final RegistryObject<Block> WOOD_WATER_PUMP = BLOCKS.register(WoodWaterPumpBlock.ID, () ->
+			new WoodWaterPumpBlock(Properties.from(Blocks.OAK_WOOD)));
 }//BlockInit
 
 

@@ -131,7 +131,7 @@ public class TankHelper {
 	 * 
 	 * Pulls fluid from tank sitting on top of tank being used
 	 *************************************************************************/
-	public static void fillFromUpper(final FluidTankTileEntityBase tankTile) {
+	public static void fillFromUpper(final TileEntity tankTile) {
 
 		moveFluid(tankTile.getPos(), PosHelper.getAboveTileEntity(tankTile), tankTile.getWorld());
 	}
@@ -143,7 +143,7 @@ public class TankHelper {
 	 * 
 	 * Fills the tank sitting below the tank being used
 	 ************************************************************************/
-	public static void drainToLower(final FluidTankTileEntityBase tankTile) {
+	public static void drainToLower(final TileEntity tankTile) {
 
 		moveFluid(PosHelper.getBelowTileEntity(tankTile), tankTile.getPos(), tankTile.getWorld());
 	}

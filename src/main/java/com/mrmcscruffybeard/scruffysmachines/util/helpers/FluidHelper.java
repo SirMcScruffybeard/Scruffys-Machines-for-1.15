@@ -2,17 +2,13 @@ package com.mrmcscruffybeard.scruffysmachines.util.helpers;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class FluidHelper {
 
@@ -39,6 +35,16 @@ public class FluidHelper {
 	public static boolean isWater(FluidStack fluidStack) {
 
 		return isFluidType(fluidStack, Fluids.WATER);
+	}
+	
+	public static boolean isWater(BlockState state) {
+		
+		return state == Fluids.WATER.getDefaultState().getBlockState();
+	}
+	
+	public static boolean isWater(World world, BlockPos pos) {
+		
+		return isWater(world.getBlockState(pos));
 	}
 
 	public static boolean isLava(FluidStack fluidStack) {

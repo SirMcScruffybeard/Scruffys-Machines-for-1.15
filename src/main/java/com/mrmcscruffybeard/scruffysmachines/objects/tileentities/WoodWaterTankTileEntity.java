@@ -24,7 +24,7 @@ public class WoodWaterTankTileEntity extends WaterTankTileEntityBase implements 
 	private WoodWaterTankTileEntity(TileEntityType<?> tileEntityTypeIn, WaterTank tankIn) {
 		super(tileEntityTypeIn, tankIn);
 		
-		this.setInTankTileEntity(this);
+		tankIn.setTankTileEntity(this);
 		
 	}
 	

@@ -64,10 +64,7 @@ public class LeatherChestBlock extends Block{
 	protected void fillStateContainer(Builder<Block, BlockState> builder) { builder.add(FACING);}
 	
 	@Override
-	public boolean hasTileEntity(BlockState state) {
-		
-		return true;
-	}
+	public boolean hasTileEntity(BlockState state) { return true; }
 	
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
