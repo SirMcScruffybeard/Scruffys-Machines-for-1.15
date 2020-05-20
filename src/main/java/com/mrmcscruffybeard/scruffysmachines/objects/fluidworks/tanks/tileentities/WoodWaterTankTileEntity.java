@@ -3,18 +3,12 @@ package com.mrmcscruffybeard.scruffysmachines.objects.fluidworks.tanks.tileentit
 import com.mrmcscruffybeard.scruffysmachines.init.ModTileEntityTypes;
 import com.mrmcscruffybeard.scruffysmachines.objects.blocks.WoodWaterTankBlock;
 import com.mrmcscruffybeard.scruffysmachines.objects.fluidworks.ILeakable;
-import com.mrmcscruffybeard.scruffysmachines.objects.fluidworks.tanks.FluidTank;
-import com.mrmcscruffybeard.scruffysmachines.objects.fluidworks.tanks.IWaterTankHandler;
 import com.mrmcscruffybeard.scruffysmachines.objects.fluidworks.tanks.WaterTank;
-import com.mrmcscruffybeard.scruffysmachines.util.helpers.FluidHelper;
-
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.Direction;
 import net.minecraftforge.fluids.FluidAttributes;
-import net.minecraftforge.fluids.FluidStack;
 
-public class WoodWaterTankTileEntity extends FluidTankTileEntity implements IWaterTankHandler, ITickableTileEntity, ILeakable{
+public class WoodWaterTankTileEntity extends WaterTankTileEntity implements ITickableTileEntity, ILeakable{
 
 	public static final String ID = WoodWaterTankBlock.ID;
 
@@ -37,27 +31,7 @@ public class WoodWaterTankTileEntity extends FluidTankTileEntity implements IWat
 		this(ModTileEntityTypes.WOOD_WATER_TANK.get(), new WaterTank(BUCKETS * FluidAttributes.BUCKET_VOLUME));
 	}
 
-	public int fill(FluidStack resource, FluidAction action, Direction dir) {
-
-		if(FluidHelper.isWater(resource) && resource != null) {
-
-			return super.fill(resource, action, dir, (WaterTank) worker);
-		}
-
-		else { return 0; }
-	}
-
-	@Override
-	public int fill(FluidStack resource, FluidAction action, Direction dir, FluidTank tank) {
-
-		if(FluidHelper.isWater(resource) && resource != null) {
-
-			return super.fill(resource, action, dir, tank);
-		}
-
-		else { return 0; }
-	}
-
+	
 	@Override
 	public void tick() {
 
@@ -89,6 +63,4 @@ public class WoodWaterTankTileEntity extends FluidTankTileEntity implements IWat
 			drain(LEAK_AMOUNT, FluidAction.EXECUTE, null, (WaterTank) worker);
 		}
 	}
-
-
 }

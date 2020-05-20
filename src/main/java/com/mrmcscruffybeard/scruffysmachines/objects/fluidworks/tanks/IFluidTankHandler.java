@@ -5,4 +5,5 @@ import com.mrmcscruffybeard.scruffysmachines.objects.fluidworks.IFluidWorkerHand
 public interface IFluidTankHandler extends IFluidWorkerHandler{
 
 	
+	
 }

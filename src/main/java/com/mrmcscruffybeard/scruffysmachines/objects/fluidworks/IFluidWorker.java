@@ -5,6 +5,15 @@ import com.mrmcscruffybeard.scruffysmachines.objects.fluids.vapors.Vapor;
 import net.minecraft.fluid.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
+/***************************************************************************************
+ * 
+ * @author SirMcScruffyBeard
+ * 
+ * Lvl: 0
+ *
+ * 	This is the start of fluid handling. It is inspired by the FluidTank and
+ * fluid handler templates provided by Forge. Found at {@link} net.minecraftforge.fluids 	
+ ****************************************************************************************/
 public interface IFluidWorker {
 
 	int getCapacity();

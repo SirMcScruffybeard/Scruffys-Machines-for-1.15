@@ -93,4 +93,10 @@ public interface IFluidWorkerHandler {
 		return worker.isFluidValid(resource);
 	}
 
+	int fill(FluidStack resource, FluidAction action, Direction dir, FluidWorker worker);
+
+	FluidStack drain(int maxDrain, FluidAction action, Direction dir, FluidWorker worker);
+
+	FluidStack drain(FluidStack resource, FluidAction action, Direction dir, FluidWorker worker);
+
 }

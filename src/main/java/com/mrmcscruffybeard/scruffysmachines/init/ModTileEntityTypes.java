@@ -1,11 +1,9 @@
 package com.mrmcscruffybeard.scruffysmachines.init;
 
 import com.mrmcscruffybeard.scruffysmachines.ScruffysMachines;
+import com.mrmcscruffybeard.scruffysmachines.objects.fluidworks.tanks.tileentities.WoodWaterTankTileEntity;
 import com.mrmcscruffybeard.scruffysmachines.objects.tileentities.BrickFurnaceTileEntity;
 import com.mrmcscruffybeard.scruffysmachines.objects.tileentities.LeatherChestTileEntity;
-import com.mrmcscruffybeard.scruffysmachines.objects.tileentities.StoneWaterTankTileEntity;
-import com.mrmcscruffybeard.scruffysmachines.objects.tileentities.WoodWaterTankTileEntity;
-
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;

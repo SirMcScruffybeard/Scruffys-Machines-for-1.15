@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 import javax.annotation.Nonnull;
 
 import com.mrmcscruffybeard.scruffysmachines.objects.fluidworks.IFluidWorkerHandler.FluidAction;
-import com.mrmcscruffybeard.scruffysmachines.objects.fluidworks.tanks.tileentities.FluidWorkerTileEntity;
 import com.mrmcscruffybeard.scruffysmachines.util.ModMath;
 
 import net.minecraft.fluid.Fluid;
@@ -49,7 +48,7 @@ public abstract class FluidWorker implements IFluidWorker{
 		setFluid(fluid);
 		return this;
 	}
-
+	
 	public CompoundNBT writeToNBT(CompoundNBT nbt) {
 
 		fluid.writeToNBT(nbt);
@@ -146,7 +145,7 @@ public abstract class FluidWorker implements IFluidWorker{
 	}
 
 
-	protected int fillFromDirection(FluidStack resource, FluidAction action, Direction dir) {
+	public int fill(FluidStack resource, FluidAction action, Direction dir) {
 
 		if(resource.isEmpty() || !isFluidValid(resource)) {return 0;}
 
@@ -181,7 +180,7 @@ public abstract class FluidWorker implements IFluidWorker{
 	}
 
 	@Nonnull
-	protected FluidStack drainFromDirection(int maxDrain, FluidAction action, Direction dir) {
+	public FluidStack drain(int maxDrain, FluidAction action, Direction dir) {
 
 		int drained = maxDrain;
 		
@@ -203,7 +202,7 @@ public abstract class FluidWorker implements IFluidWorker{
 	}
 
 	@Nonnull
-	protected FluidStack drainFromDirection(FluidStack resource, FluidAction action, Direction dir) {
+	public FluidStack drain(FluidStack resource, FluidAction action, Direction dir) {
 
 		if(resource.isEmpty() || !fluid.isFluidEqual(resource)) {
 			
@@ -211,7 +210,7 @@ public abstract class FluidWorker implements IFluidWorker{
 			
 		}
 		
-		return drainFromDirection(resource.getAmount(), action, dir);
+		return drain(resource.getAmount(), action, dir);
 	}
 
 	protected void onContentsFilled(Direction dir) {

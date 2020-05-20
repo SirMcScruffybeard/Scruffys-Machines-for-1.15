@@ -1,9 +1,9 @@
-package com.mrmcscruffybeard.scruffysmachines.objects.fluidworks.tanks.tileentities;
+package com.mrmcscruffybeard.scruffysmachines.objects.fluidworks;
 
-import com.mrmcscruffybeard.scruffysmachines.objects.fluidworks.FluidWorker;
-import com.mrmcscruffybeard.scruffysmachines.objects.fluidworks.IFluidWorkerHandler;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.Direction;
+import net.minecraftforge.fluids.FluidStack;
 
 public abstract class FluidWorkerTileEntity extends TileEntity implements IFluidWorkerHandler {
 
@@ -35,6 +35,24 @@ public abstract class FluidWorkerTileEntity extends TileEntity implements IFluid
 	protected void setCapacity(int capacityIn) {
 		
 		worker.setCapacity(capacityIn);
+	}
+	
+	@Override
+	public int fill(FluidStack resource, FluidAction action, Direction dir, FluidWorker worker) {
+
+		return worker.fill(resource, action, dir);
+	}
+
+	@Override
+	public FluidStack drain(int maxDrain, FluidAction action, Direction dir, FluidWorker worker) {
+
+		return worker.drain(maxDrain, action, dir);
+	}
+
+	@Override
+	public FluidStack drain(FluidStack resource, FluidAction action, Direction dir, FluidWorker worker) {
+
+		return worker.drain(resource, action, dir);
 	}
 	
 }

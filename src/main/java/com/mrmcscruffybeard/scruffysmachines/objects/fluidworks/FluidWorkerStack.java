@@ -1,7 +1,5 @@
 package com.mrmcscruffybeard.scruffysmachines.objects.fluidworks;
 
-import com.mrmcscruffybeard.scruffysmachines.objects.fluidworks.tanks.tileentities.FluidWorkerTileEntity;
-
 public class FluidWorkerStack {
 
 	private int totalCapacity = 0;

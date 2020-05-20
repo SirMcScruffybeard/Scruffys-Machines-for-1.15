@@ -7,4 +7,10 @@ public interface ILiquidTankHandler extends IFluidTankHandler{
 		
 		return false;
 	}
+	
+	boolean canFillWithBucket(LiquidTank tank);
+	
+	boolean fillWithBucket();
+	
+	
 }
