@@ -1,4 +1,4 @@
-package com.mrmcscruffybeard.scruffysmachines.objects.tanks;
+package com.mrmcscruffybeard.scruffysmachines.objects.fluidworks;
 
 public interface ILeakable {
 	
