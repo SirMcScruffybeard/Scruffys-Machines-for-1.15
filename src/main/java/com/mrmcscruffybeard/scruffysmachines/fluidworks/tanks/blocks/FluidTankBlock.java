@@ -1,9 +1,7 @@
-package com.mrmcscruffybeard.scruffysmachines.objects.blocks.bases;
+package com.mrmcscruffybeard.scruffysmachines.fluidworks.tanks.blocks;
 
-import com.mrmcscruffybeard.scruffysmachines.ScruffysMachines;
-import com.mrmcscruffybeard.scruffysmachines.objects.tileentities.bases.FluidTankTileEntityBase;
-import com.mrmcscruffybeard.scruffysmachines.util.helpers.BucketHelper;
-import com.mrmcscruffybeard.scruffysmachines.util.helpers.TankHelper;
+import com.mrmcscruffybeard.scruffysmachines.fluidworks.tanks.IFluidTankTile;
+import com.mrmcscruffybeard.scruffysmachines.fluidworks.tanks.tileetnties.FluidTankTile;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -21,13 +19,13 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
-public abstract class FluidTankBlockBase extends Block {
+public abstract class FluidTankBlock extends Block {
 
 	protected static final String ID_TANK = "_tank";
 
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 	
-	public FluidTankBlockBase(Properties properties) {
+	public FluidTankBlock(Properties properties) {
 		super(properties);
 
 		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
@@ -58,11 +56,11 @@ public abstract class FluidTankBlockBase extends Block {
 
 			TileEntity tile = worldIn.getTileEntity(pos);
 
-			if(TankHelper.isFluidTankTileEntity(tile)) {
+			if(IFluidTankTile.isFluidTankAtPos(pos, worldIn)) {
 			
-				if(((FluidTankTileEntityBase) tile).canSpill()) { 
+				if(((FluidTankTile) tile).canSpill()) { 
 					
-					((FluidTankTileEntityBase) tile).spill(pos, worldIn);
+					((FluidTankTile) tile).spill(pos, worldIn);
 				}
 
 			} //instance of

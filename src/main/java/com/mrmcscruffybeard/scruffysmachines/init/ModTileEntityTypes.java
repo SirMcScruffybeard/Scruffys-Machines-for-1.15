@@ -1,11 +1,10 @@
 package com.mrmcscruffybeard.scruffysmachines.init;
 
 import com.mrmcscruffybeard.scruffysmachines.ScruffysMachines;
+import com.mrmcscruffybeard.scruffysmachines.fluidworks.tanks.tileetnties.StoneWaterTankTile;
+import com.mrmcscruffybeard.scruffysmachines.fluidworks.tanks.tileetnties.WoodWaterTankTile;
 import com.mrmcscruffybeard.scruffysmachines.objects.tileentities.BrickFurnaceTileEntity;
 import com.mrmcscruffybeard.scruffysmachines.objects.tileentities.LeatherChestTileEntity;
-import com.mrmcscruffybeard.scruffysmachines.objects.tileentities.StoneWaterTankTileEntity;
-import com.mrmcscruffybeard.scruffysmachines.objects.tileentities.WoodWaterPumpTileEntity;
-import com.mrmcscruffybeard.scruffysmachines.objects.tileentities.WoodWaterTankTileEntity;
 
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
@@ -26,12 +25,12 @@ public class ModTileEntityTypes {
 			.register(LeatherChestTileEntity.ID, () -> TileEntityType.Builder.create(LeatherChestTileEntity::new,  BlockInit.LEATHER_CHEST.get()).build(null));
 
 	
-	//Fluid Tank Tile Entities
-	public static final RegistryObject<TileEntityType<StoneWaterTankTileEntity>> STONE_WATER_TANK = TILE_ENTITY_TYPES
-			.register(StoneWaterTankTileEntity.ID, () -> TileEntityType.Builder.create(StoneWaterTankTileEntity::new,  BlockInit.STONE_WATER_TANK.get()).build(null));
+	
+	public static final RegistryObject<TileEntityType<StoneWaterTankTile>> STONE_WATER_TANK = TILE_ENTITY_TYPES
+			.register(StoneWaterTankTile.ID, () -> TileEntityType.Builder.create(StoneWaterTankTile::new,  BlockInit.STONE_WATER_TANK.get()).build(null));
 
-	public static final RegistryObject<TileEntityType<WoodWaterTankTileEntity>> WOOD_WATER_TANK = TILE_ENTITY_TYPES
-			.register(WoodWaterTankTileEntity.ID, () -> TileEntityType.Builder.create(WoodWaterTankTileEntity::new, BlockInit.WOOD_WATER_TANK.get()).build(null));
+	public static final RegistryObject<TileEntityType<WoodWaterTankTile>> WOOD_WATER_TANK = TILE_ENTITY_TYPES
+			.register(WoodWaterTankTile.ID, () -> TileEntityType.Builder.create(WoodWaterTankTile ::new, BlockInit.WOOD_WATER_TANK.get()).build(null));
 	
 	
 	public static final RegistryObject<TileEntityType<WoodWaterPumpTileEntity>> WOOD_WATER_PUMP = TILE_ENTITY_TYPES

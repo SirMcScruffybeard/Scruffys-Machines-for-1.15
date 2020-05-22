@@ -1,13 +1,13 @@
-package com.mrmcscruffybeard.scruffysmachines.objects.blocks;
+package com.mrmcscruffybeard.scruffysmachines.fluidworks.tanks.blocks;
 
 import com.mrmcscruffybeard.scruffysmachines.init.ModTileEntityTypes;
-import com.mrmcscruffybeard.scruffysmachines.objects.blocks.bases.WaterTankBlockBase;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockReader;
 
-public class StoneWaterTankBlock extends WaterTankBlockBase {
+public class StoneWaterTankBlock extends WaterTankBlock {
 
 	public static String ID = "stone" + ID_WATER_TANK;
 

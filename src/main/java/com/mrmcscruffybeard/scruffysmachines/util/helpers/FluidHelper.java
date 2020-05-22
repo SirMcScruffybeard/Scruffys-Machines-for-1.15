@@ -1,5 +1,8 @@
 package com.mrmcscruffybeard.scruffysmachines.util.helpers;
 
+import com.mrmcscruffybeard.scruffysmachines.fluidworks.workerspecifiers.IWaterWorker;
+import com.mrmcscruffybeard.scruffysmachines.fluidworks.workerspecifiers.IWorkerSpecifier;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.fluid.Fluid;
@@ -12,20 +15,16 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class FluidHelper {
 
-	public static boolean hasBucketWorth(FluidStack fluid) {
-
-		return isBucketWorth(fluid.getAmount());
+	public static boolean isBucketWorth(FluidStack resource) {
+		
+		return resource.getAmount() >= FluidAttributes.BUCKET_VOLUME;
 	}
-
-	public static boolean isBucketWorth(int amount) {
-
-		return amount >= FluidAttributes.BUCKET_VOLUME;
-	}
-
+	
 	public static boolean isNumBucketsWorth(int amount, int numBuckets) {
 
 		return amount >= (numBuckets * FluidAttributes.BUCKET_VOLUME);
 	}
+<<<<<<< HEAD
 
 	public static boolean isFluidType(final FluidStack fluidStack, final Fluid fluid) {
 
@@ -50,6 +49,12 @@ public class FluidHelper {
 	public static boolean isLava(FluidStack fluidStack) {
 
 		return isFluidType(fluidStack, Fluids.LAVA);
+=======
+	
+	public static FluidStack createBucketWorth(Fluid fluid) {
+		
+		return new FluidStack(fluid, FluidAttributes.BUCKET_VOLUME);
+>>>>>>> water-tank
 	}
 
 	/**************************************************************************************************
@@ -75,7 +80,7 @@ public class FluidHelper {
 
 	public static void flood(final BlockPos pos, final FluidStack fluidIn, final World world) {
 
-		if(world.getDimension().getType() != DimensionType.THE_NETHER || !isWater(fluidIn)) {
+		if(world.getDimension().getType() != DimensionType.THE_NETHER || !IWaterWorker.isWater(fluidIn)) {
 		
 		int buckets = fluidIn.getAmount() / FluidAttributes.BUCKET_VOLUME;
 
@@ -93,7 +98,7 @@ public class FluidHelper {
 
 		if(!world.isRemote) {
 
-			if(hasBucketWorth(fluid)) {
+			if(isBucketWorth(fluid)) {
 
 				world.setBlockState(pos, getBlockStateFromFluidStack(fluid));
 

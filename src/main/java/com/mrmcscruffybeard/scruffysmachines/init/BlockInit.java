@@ -1,12 +1,11 @@
 package com.mrmcscruffybeard.scruffysmachines.init;
 
 import com.mrmcscruffybeard.scruffysmachines.ScruffysMachines;
+import com.mrmcscruffybeard.scruffysmachines.fluidworks.tanks.blocks.StoneWaterTankBlock;
+import com.mrmcscruffybeard.scruffysmachines.fluidworks.tanks.blocks.WoodWaterTankBlock;
 import com.mrmcscruffybeard.scruffysmachines.objects.blocks.BrickFurnaceBlock;
 import com.mrmcscruffybeard.scruffysmachines.objects.blocks.CrumblerBlock;
 import com.mrmcscruffybeard.scruffysmachines.objects.blocks.LeatherChestBlock;
-import com.mrmcscruffybeard.scruffysmachines.objects.blocks.StoneWaterTankBlock;
-import com.mrmcscruffybeard.scruffysmachines.objects.blocks.WoodWaterPumpBlock;
-import com.mrmcscruffybeard.scruffysmachines.objects.blocks.WoodWaterTankBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Block.Properties;
 import net.minecraft.block.Blocks;
