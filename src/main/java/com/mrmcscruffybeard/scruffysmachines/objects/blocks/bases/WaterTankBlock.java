@@ -1,6 +1,6 @@
 package com.mrmcscruffybeard.scruffysmachines.objects.blocks.bases;
 
-import com.mrmcscruffybeard.scruffysmachines.objects.fluidworks.tanks.IWaterTankHandler;
+import com.mrmcscruffybeard.scruffysmachines.fluidworks.tanktiles.WaterTankTile;
 import com.mrmcscruffybeard.scruffysmachines.util.helpers.BucketHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
@@ -13,13 +13,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 
-public abstract class WaterTankBlockBase extends FluidTankBlockBase{
+public abstract class WaterTankBlock extends FluidTankBlock{
 
 	public static final String ID_WATER_TANK = "_water" + ID_TANK;
 
 	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 
-	public WaterTankBlockBase(Properties properties) {
+	public WaterTankBlock(Properties properties) {
 		super(properties);
 
 	}
@@ -28,9 +28,9 @@ public abstract class WaterTankBlockBase extends FluidTankBlockBase{
 	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player,
 			Hand handIn, BlockRayTraceResult hit) {
 
-		if(!world.isRemote && IWaterTankHandler.isHandler(world.getTileEntity(pos))) {
+		if(!world.isRemote && world.getTileEntity(pos) instanceof WaterTankTile) {
 
-			IWaterTankHandler tank = (IWaterTankHandler) world.getTileEntity(pos);
+			WaterTankTile tank = (WaterTankTile) world.getTileEntity(pos);
 
 			Item heldItem = player.getHeldItemMainhand().getItem();
 
