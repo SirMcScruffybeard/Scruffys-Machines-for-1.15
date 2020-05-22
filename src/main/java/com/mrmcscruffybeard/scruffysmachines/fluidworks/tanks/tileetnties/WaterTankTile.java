@@ -1,4 +1,4 @@
-package com.mrmcscruffybeard.scruffysmachines.fluidworks.tanktiles;
+package com.mrmcscruffybeard.scruffysmachines.fluidworks.tanks.tileetnties;
 
 import com.mrmcscruffybeard.scruffysmachines.fluidworks.workerspecifiers.IWaterWorker;
 import com.mrmcscruffybeard.scruffysmachines.util.helpers.FluidHelper;

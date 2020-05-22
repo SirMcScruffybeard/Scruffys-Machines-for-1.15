@@ -1,7 +1,7 @@
-package com.mrmcscruffybeard.scruffysmachines.objects.blocks.bases;
+package com.mrmcscruffybeard.scruffysmachines.fluidworks.tanks.blocks;
 
-import com.mrmcscruffybeard.scruffysmachines.fluidworks.tanktiles.FluidTankTile;
-import com.mrmcscruffybeard.scruffysmachines.fluidworks.tanktiles.IFluidTankTile;
+import com.mrmcscruffybeard.scruffysmachines.fluidworks.tanks.IFluidTankTile;
+import com.mrmcscruffybeard.scruffysmachines.fluidworks.tanks.tileetnties.FluidTankTile;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

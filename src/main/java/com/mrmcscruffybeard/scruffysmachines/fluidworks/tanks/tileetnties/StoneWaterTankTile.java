@@ -1,8 +1,8 @@
-package com.mrmcscruffybeard.scruffysmachines.fluidworks.tanktiles;
+package com.mrmcscruffybeard.scruffysmachines.fluidworks.tanks.tileetnties;
 
+import com.mrmcscruffybeard.scruffysmachines.fluidworks.tanks.blocks.StoneWaterTankBlock;
 import com.mrmcscruffybeard.scruffysmachines.fluidworks.workerspecifiers.IWaterWorker;
 import com.mrmcscruffybeard.scruffysmachines.init.ModTileEntityTypes;
-import com.mrmcscruffybeard.scruffysmachines.objects.blocks.StoneWaterTankBlock;
 
 import net.minecraft.tileentity.TileEntityType;
 

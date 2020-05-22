@@ -1,6 +1,7 @@
-package com.mrmcscruffybeard.scruffysmachines.fluidworks.tanktiles;
+package com.mrmcscruffybeard.scruffysmachines.fluidworks.tanks;
 
 import com.mrmcscruffybeard.scruffysmachines.fluidworks.IFluidWorker;
+import com.mrmcscruffybeard.scruffysmachines.fluidworks.tanks.tileetnties.FluidTankTile;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;

@@ -1,6 +1,6 @@
-package com.mrmcscruffybeard.scruffysmachines.objects.blocks.bases;
+package com.mrmcscruffybeard.scruffysmachines.fluidworks.tanks.blocks;
 
-import com.mrmcscruffybeard.scruffysmachines.fluidworks.tanktiles.WaterTankTile;
+import com.mrmcscruffybeard.scruffysmachines.fluidworks.tanks.tileetnties.WaterTankTile;
 import com.mrmcscruffybeard.scruffysmachines.util.helpers.BucketHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;

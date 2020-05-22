@@ -2,7 +2,7 @@ package com.mrmcscruffybeard.scruffysmachines.events;
 
 import com.mrmcscruffybeard.scruffysmachines.ScruffysMachines;
 import com.mrmcscruffybeard.scruffysmachines.fluidworks.FluidWorkerTile;
-import com.mrmcscruffybeard.scruffysmachines.fluidworks.tanktiles.WaterTankTile;
+import com.mrmcscruffybeard.scruffysmachines.fluidworks.tanks.tileetnties.WaterTankTile;
 import com.mrmcscruffybeard.scruffysmachines.fluidworks.workerspecifiers.IWaterWorker;
 import com.mrmcscruffybeard.scruffysmachines.objects.items.tools.WoodDipstickItem;
 

@@ -60,6 +60,12 @@ public abstract class FluidWorkerTile extends TileEntity implements IFluidWorker
 	public Fluid getFluidType() { return holder.getFluidType(); }
 
 	@Override
+	public boolean isFluidValid(FluidStack resource) {
+		
+		return holder.isFluidValid(resource);
+	}
+	
+	@Override
 	public void read(CompoundNBT tag)
 	{
 		super.read(tag);

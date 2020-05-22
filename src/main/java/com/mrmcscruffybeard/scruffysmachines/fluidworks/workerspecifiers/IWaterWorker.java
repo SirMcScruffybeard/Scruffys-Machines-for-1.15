@@ -1,6 +1,7 @@
 package com.mrmcscruffybeard.scruffysmachines.fluidworks.workerspecifiers;
 
-import com.mrmcscruffybeard.scruffysmachines.fluidworks.tanktiles.WaterTankTile;
+import com.mrmcscruffybeard.scruffysmachines.fluidworks.tanks.tileetnties.WaterTankTile;
+
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.tileentity.TileEntity;

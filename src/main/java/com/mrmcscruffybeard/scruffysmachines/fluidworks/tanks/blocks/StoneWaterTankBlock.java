@@ -1,7 +1,7 @@
-package com.mrmcscruffybeard.scruffysmachines.objects.blocks;
+package com.mrmcscruffybeard.scruffysmachines.fluidworks.tanks.blocks;
 
 import com.mrmcscruffybeard.scruffysmachines.init.ModTileEntityTypes;
-import com.mrmcscruffybeard.scruffysmachines.objects.blocks.bases.WaterTankBlock;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;

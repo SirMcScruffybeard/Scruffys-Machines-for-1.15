@@ -1,8 +1,9 @@
-package com.mrmcscruffybeard.scruffysmachines.fluidworks.tanktiles;
+package com.mrmcscruffybeard.scruffysmachines.fluidworks.tanks.tileetnties;
 
 import javax.annotation.Nonnull;
 
 import com.mrmcscruffybeard.scruffysmachines.fluidworks.FluidWorkerTile;
+import com.mrmcscruffybeard.scruffysmachines.fluidworks.tanks.IFluidTankTile;
 import com.mrmcscruffybeard.scruffysmachines.util.helpers.FluidHelper;
 
 import net.minecraft.tileentity.TileEntityType;

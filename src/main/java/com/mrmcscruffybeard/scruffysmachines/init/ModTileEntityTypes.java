@@ -1,8 +1,8 @@
 package com.mrmcscruffybeard.scruffysmachines.init;
 
 import com.mrmcscruffybeard.scruffysmachines.ScruffysMachines;
-import com.mrmcscruffybeard.scruffysmachines.fluidworks.tanktiles.StoneWaterTankTile;
-import com.mrmcscruffybeard.scruffysmachines.fluidworks.tanktiles.WoodWaterTankTile;
+import com.mrmcscruffybeard.scruffysmachines.fluidworks.tanks.tileetnties.StoneWaterTankTile;
+import com.mrmcscruffybeard.scruffysmachines.fluidworks.tanks.tileetnties.WoodWaterTankTile;
 import com.mrmcscruffybeard.scruffysmachines.objects.tileentities.BrickFurnaceTileEntity;
 import com.mrmcscruffybeard.scruffysmachines.objects.tileentities.LeatherChestTileEntity;
 

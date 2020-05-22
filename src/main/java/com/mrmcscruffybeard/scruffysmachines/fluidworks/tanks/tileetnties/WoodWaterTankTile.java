@@ -1,9 +1,9 @@
-package com.mrmcscruffybeard.scruffysmachines.fluidworks.tanktiles;
+package com.mrmcscruffybeard.scruffysmachines.fluidworks.tanks.tileetnties;
 
 import com.mrmcscruffybeard.scruffysmachines.fluidworks.ILeakableTileEntity;
+import com.mrmcscruffybeard.scruffysmachines.fluidworks.tanks.blocks.WoodWaterTankBlock;
 import com.mrmcscruffybeard.scruffysmachines.fluidworks.workerspecifiers.IWaterWorker;
 import com.mrmcscruffybeard.scruffysmachines.init.ModTileEntityTypes;
-import com.mrmcscruffybeard.scruffysmachines.objects.blocks.WoodWaterTankBlock;
 
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
